@@ -284,6 +284,9 @@ vertexDegree(g)
 vertexDegree(g,vec.degree)
 @ 
 \subsubsection*{Balaban-like information indices \cite{balaban_1991}:}
+
+Note, that this class of Descriptors return \textit{Inf} if you have a graph with $|V| < 3$.
+
 \begin{eqnarray}
 U(G):= \frac{|E|}{\mu +1} \sum_{(v_i,v_j) \in E} [u(v_i)u(v_j)]^{- \frac{1}{2}}, \label{eq_balaban_U_index} \\
 X(G):= \frac{|E|}{\mu +1} \sum_{(v_i,v_j) \in E} [x(v_i)x(v_j)]^{- \frac{1}{2}}, \label{eq_balaban_X_index}
@@ -388,7 +391,7 @@ c_{1}:= \rho(G)^2, c_{2}:= (\rho(G)-1)^2, \ldots, c_{\rho(G)}:= 1.
 \item exponential
 \begin{equation}
 \label{eq:exp}
-c_{1}:= \rho(G), c_{2}:= \rho(G)e^{-1}, \ldots, c_{\rho(G)}:= \rho(G)e^{-\rho(G) + 1}.
+c_{1}:= \rho(G), c_{2}:= \rho(G)e^{1}, \ldots, c_{\rho(G)}:= \rho(G)e^{-\rho(G) + 1}.
 \end{equation}
 $\rho(G)$ represents the diameter of the network.
 
@@ -401,10 +404,12 @@ It has following input parameters:
 \item \textit{dist}: the distance matrix of g
 \item \textup{coeff}: specifies the weighting parameter: "const", "lin", "quad", "exp", "const" or "cust" are available constants. If it is set to
     "cust" you have to specify your customized weighting schema with the parameter \textit{custCoeff}.
-\item \textit{infofunct}: specifies the information functional: "sphere", "pathlength" or "vertcent" are available settings.
+\item \textit{infofunct}: specifies the information functional: "sphere", "pathlength", "vertcent" or "degree" are available settings.
 \item \textit{lambda}: scaling constant for the distance, default set to 1000.
 \item \textit{custCoeff}: specifies the customized weighting schema. To use it you need to set \textit{coeff}="const".
 \end{itemize}
+
+Note that some combinations of these settings can cause the descriptor to retrun \textit{NaN}. In that case you have to check for \textit{warnings}.
 
 The method returns a list with following entries:
 \begin{itemize}

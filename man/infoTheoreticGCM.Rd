@@ -5,10 +5,11 @@
 \description{Measures of this group assign a probability value to each
   vertex of the network using a so-called information functional f which
   captures structural information of the network g.
+  Note that some combinations of the settings can cause the descriptor to retrun NaN. In that case you have to check for warnings.
 }
 \usage{
 infoTheoreticGCM(g, dist = NULL, coeff = "lin", infofunct = "sphere",
-lambda = 1000, custCoeff=NULL, alpha=NULL)
+lambda = 1000, custCoeff=NULL, alpha=0.5)
 }
 \arguments{
   \item{g}{a graph as a graphNEL object.

@@ -1,4 +1,4 @@
-infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lambda=1000, custCoeff=NULL, alpha=NULL){
+infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lambda=1000, custCoeff=NULL, alpha=0.5){
   require("graph")
   allowed.coeff <-  c("lin","quad","exp","const","cust")
   allowed.functionals <-  c("sphere","pathlength","vertcent","degree")
@@ -46,6 +46,9 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
   pis <- fvi/fvi.sum
   itgcm <- list()
   itgcm[["entropy"]] <- (-sum(pis*log2(pis)))
+  if(is.nan(itgcm[["entropy"]])){
+     warning("Entropy returned not a number (NaN): check your parameters")
+  }
   itgcm[["distance"]] <- (lambda*(log2(length(pis)) - itgcm[["entropy"]]))
   itgcm[["pis"]] <- pis
   itgcm[["fvis"]] <- fvi
@@ -125,13 +128,13 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
   nam <- nodes(g)
   #determine number of all possible shortest path
   deltaG <- sapply(1:lvs,function(n){
-  asp <- get.all.shortest.paths(ig,from=(n-1))
-      lvi <- table(sapply(asp,length)-1,exclude=0)
-      tmp.sum <- sapply(1:max(as.numeric(names(lvi))),function(lpl){
-        sum(1:lpl)
-  })
-  lsp <- sapply(asp,length)
-  deltaGvi <- sapply(2:max(lsp),function(j){
+    asp <- get.all.shortest.paths(ig,from=(n-1))
+#      lvi <- table(sapply(asp,length)-1,exclude=0)
+#      tmp.sum <- sapply(1:max(as.numeric(names(lvi))),function(lpl){
+#        sum(1:lpl)
+#  })
+    lsp <- sapply(asp,length)
+    deltaGvi <- sapply(2:max(lsp),function(j){
       Pj <- asp[lsp==j]
       sj <- lapply(Pj, function(pjh){
          deg[pjh+1]
@@ -148,12 +151,14 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
   fvi <- sapply(deltaG, function(deltaGvi){
      sum(deltaGvi*ci[1:length(deltaGvi)])
   })
-
-  if(!is.null(alpha)){
-     return(alpha^fvi)
-  }else{
-     return(fvi)
-     #todo check for max entrpy (=all zero)
-  }
+  names(fvi) <- nam
+  #TODO: add names to vi
+  ret <- alpha^fvi
+#  if(is.nan(ret)){
+#     warning("Result is Not a Number (NaN) -> value was set to -999")
+#     return (-999)
+#  }else{
+#     return(ret)
+#  }
 }
 

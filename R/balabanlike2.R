@@ -7,6 +7,10 @@ balabanlike2 <- function(g, dist=NULL){
   if(is.null(dist)){
     dist <- distanceMatrix(g)
   }
+  if(numNodes(g)<3){
+    warning("Graps with |V| < 3 result in: Inf! -> value was set to -999")
+    return (-999)
+  }
   
   mue <- rowSums(dist)
   sigma <- apply(dist,1,max)

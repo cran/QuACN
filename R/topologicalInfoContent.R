@@ -14,7 +14,10 @@ topologicalInfoContent <- function(g, dist=NULL, deg=NULL){
   pis <- On/sum(On)
   In=pis*log2(pis)
   Iorb <- (-1)*sum(In)
-  return(Iorb)
+  ret <- list()
+  ret[["entropy"]] <- Iorb
+  ret[["orbits"]] <- On
+  return(ret)
 }
 
 .getTopology <- function(g,dist,deg){
