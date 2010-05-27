@@ -8,8 +8,8 @@
   n <- nodes(g)
   m <- matrix(0, nrow=length(n), ncol=length(n), dimnames=list(n, n))
   for (e in names(raw)) {
-    vert <- strsplit(e, "|")[[1]]
-    m[[vert[[1]], vert[[3]]]] <- raw[[e]][[att]]
+    vert <- strsplit(e, "\\|")[[1]]
+    m[[vert[[1]], vert[[2]]]] <- raw[[e]][[att]]
   }
   m
 }

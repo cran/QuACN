@@ -17,7 +17,7 @@ graphVertexComplexity <- function(g, dist=NULL){
   names(distd) <- nam
   vic <- sapply(distd,function(dd){
     pis <- dd/nV
-    sum(pis*log2(pis))
+    -sum(pis*log2(pis))
   })
-  return(sum(vic))
+  return(sum(vic)/nV)
 }

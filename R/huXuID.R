@@ -5,9 +5,9 @@ huXuID <- function(g, deg=NULL) {
     deg <- graph::degree(g)
 
   n <- nodes(g)
-  nd <- .nodeDataVector(g, "atom")
+  nd <- .nodeDataVector(g, "atom->number")
   e <- edges(g)
-  ed <- .edgeDataMatrix(g, "weight")
+  ed <- .edgeDataMatrix(g, "bond")
 
   deg[deg == 0] <- 0.5
   Z <- sapply(n, function(v) as.integer(nd[[v]]))

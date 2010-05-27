@@ -5,7 +5,7 @@
 \description{The method calculates multiple descriptors for a list of graphs.
 }
 \usage{
-calculateDescriptors(graphs, ..., labels = FALSE)
+calculateDescriptors(graphs, ..., labels=FALSE, log=FALSE)
 }
 \arguments{
   \item{graphs}{either a list of or a single graphNEL object.
@@ -14,6 +14,9 @@ calculateDescriptors(graphs, ..., labels = FALSE)
 }
   \item{labels}{whether or not the columns of the resulting data frame should
     be named using the getLabels() method.
+}
+  \item{log}{whether or not informative messages about the progress of the
+    calculation should be printed
 }
 }
 
@@ -34,6 +37,7 @@ calculateDescriptors(graphs, ..., labels = FALSE)
     1005 \tab compactness \cr
     1006 \tab productOfRowSums \cr
     1007 \tab hyperDistancePathIndex \cr
+    1008 \tab dobrynin \cr
     2000 \tab --- all of 2xxx \cr
     2001 \tab totalAdjacency \cr
     2002 \tab zagreb1 \cr
@@ -59,6 +63,16 @@ calculateDescriptors(graphs, ..., labels = FALSE)
     3007 \tab balabanlike1 \cr
     3008 \tab balabanlike2 \cr
     3009 \tab graphVertexComplexity \cr
+    3010 \tab informationBondIndex \cr
+    3011 \tab edgeEqualityMIC \cr
+    3012 \tab edgeMagnitudeMIC \cr
+    3013 \tab symmetryIndex \cr
+    3014 \tab bonchev3 \cr
+    3015 \tab graphDistanceComplexity \cr
+    3016 \tab distanceDegreeMIC \cr
+    3017 \tab distanceDegreeEquality \cr
+    3018 \tab distanceDegreeCompactness \cr
+    3019 \tab informationLayerIndex \cr
     4000 \tab --- all of 4xxx \cr
     4001 \tab mediumArticulation \cr
     4002 \tab efficiency \cr
@@ -76,6 +90,11 @@ calculateDescriptors(graphs, ..., labels = FALSE)
     5006 \tab infoTheoreticGCM: pathlength, lin \cr
     5007 \tab infoTheoreticGCM: degree, exp \cr
     5008 \tab infoTheoreticGCM: degree, lin \cr
+    5009 \tab infoTheoreticLabeledV1: exp \cr
+    5010 \tab infoTheoreticLabeledV1: lin \cr
+    5011 \tab infoTheoreticLabeledV2 \cr
+    5012 \tab infoTheoreticLabeledE: exp \cr
+    5013 \tab infoTheoreticLabeledE: lin \cr
     6000 \tab --- all of 6xxx \cr
     6001 \tab eigenvalueBased: adjacencyMatrix, s=1 \cr
     6002 \tab eigenvalueBased: adjacencyMatrix, s=2 \cr
@@ -130,6 +149,9 @@ calculateDescriptors(graphs, ..., labels = FALSE)
   to give the column a different name in the output data frame.  This is
   needed when you want to calculate a descriptor more than once with
   varying arguments.
+
+  If log is TRUE, a progress message is printed to the standard output
+  connection for each graph in the list.
 }
 
 \value{A data frame where rows and columns represent the input graphs and

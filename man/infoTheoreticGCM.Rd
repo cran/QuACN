@@ -9,7 +9,7 @@
 }
 \usage{
 infoTheoreticGCM(g, dist = NULL, coeff = "lin", infofunct = "sphere",
-lambda = 1000, custCoeff=NULL, alpha=0.5, prec=53)
+lambda = 1000, custCoeff=NULL, alpha=0.5, prec=53, flag.alpha=FALSE)
 }
 \arguments{
   \item{g}{a graph as a graphNEL object.
@@ -37,6 +37,9 @@ lambda = 1000, custCoeff=NULL, alpha=0.5, prec=53)
     only implemented for degree-degree association).  Values up to 53
     are handled with the built-in double data type; larger values
     trigger the usage of Rmpfr.
+}
+  \item{flag.alpha}{if set, the base 0.5 exponential function will be
+    applied to the values of the "sphere" functional.
 }
 }
 \details{For details see the vignette.

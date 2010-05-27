@@ -3,6 +3,6 @@ bondOrderID <- function(g) {
     stop("'g' has to be a 'graphNEL' object")
 
   e <- edges(g)
-  ed <- .edgeDataMatrix(g, "weight")
+  ed <- .edgeDataMatrix(g, "bond")
   .weightedPathSum(e, NULL, function(i, from, to) as.numeric(ed[[from, to]]))
 }

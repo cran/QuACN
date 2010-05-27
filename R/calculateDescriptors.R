@@ -1,11 +1,16 @@
-calculateDescriptors <- function(graphs, ..., labels = FALSE) {
+calculateDescriptors <- function(graphs, ..., labels=FALSE, log=FALSE) {
   argv <- list(...)
 
   if (class(graphs) != "list") {
     graphs <- list(graphs)
   }
 
-  result <- lapply(graphs, function(g) {
+  result <- lapply(1:length(graphs), function(n) {
+    g <- graphs[[n]]
+    if (log)
+      cat("Calculating selected descriptors for network",
+          n, "of", length(graphs), "\n")
+
     values <- list()
     cache <- new.env()
     i <- 1
@@ -28,7 +33,7 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
         valueName <- sub("^\\.", "", func)
         valueName <- sub("^.*@", "", valueName)
         if (length(value) == 1)
-          values[[valueName]] <- value
+          values[[valueName]] <- unlist(value)
         else {
           for (name in names(value))
             values[[paste(valueName, name, sep=".")]] <- value[[name]]
@@ -39,7 +44,10 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
     values
   })
 
-  result <- data.frame(do.call(rbind, result))
+  cn <- names(result[[1]])
+  result <- matrix(unlist(result), byrow=TRUE, ncol=length(cn))
+  colnames(result) <- cn
+  result <- data.frame(result)
 
   if (labels)
     colnames(result) <- sapply(colnames(result), getLabels)
@@ -96,6 +104,14 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
 }
 
 .degreeHelper <- function(g) graph::degree(g)
+
+.dobrynin <- function(g, dist=NULL) {
+  dobrynin(g, dist)[c("eccentricityGraph", "avgeccOfG", "ecentricGraph",
+                      "graphIntegration", "unipolarity", "variation",
+                      "centralization", "avgDistance",
+                      "meanDistVertexDeviation")]
+}
+
 .topologicalInfoContent <- function(g, dist=NULL, deg=NULL) {
   topologicalInfoContent(g, dist, deg)[["entropy"]]
 }
@@ -106,6 +122,22 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
     function(g, dist=NULL, lambda=1000, alpha=0.5, prec=53) {
       result <- infoTheoreticGCM(g, dist=dist, coeff=coeff, infofunct=infofunct,
         lambda=lambda, alpha=alpha, prec=prec)
+      result[c("entropy", "distance")]
+  }, parent.env(environment()))
+  name
+}
+
+.metaInfoTheoretic <- function(funct, coeff) {
+  if (is.null(coeff))
+    name <- paste(".", funct, sep="")
+  else
+    name <- paste(paste(".", funct, sep=""), coeff, sep="_")
+  assign(name,
+    function(g, lambda=1000) {
+      args <- list(`g` = g, `lambda` = lambda)
+      if (!is.null(coeff))
+        args[["coeff"]] <- coeff
+      result <- do.call(funct, args)
       result[c("entropy", "distance")]
   }, parent.env(environment()))
   name
@@ -132,8 +164,8 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
     "meanDistanceDeviation",                              # 1004
     "compactness",                                        # 1005
     "productOfRowSums",                                   # 1006
-    "hyperDistancePathIndex"                              # 1007
-    # "dobrynin"                                          # 1008 TODO
+    "hyperDistancePathIndex",                             # 1007
+    ".dobrynin"                                           # 1008
   ),
   # group 2000
   c(
@@ -162,7 +194,17 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
     "vertexDegree",                                       # 3006
     "balabanlike1",                                       # 3007
     "balabanlike2",                                       # 3008
-    "graphVertexComplexity"                               # 3009
+    "graphVertexComplexity",                              # 3009
+    "informationBondIndex",                               # 3010
+    "edgeEqualityMIC",                                    # 3011
+    "edgeMagnitudeMIC",                                   # 3012
+    "symmetryIndex",                                      # 3013
+    "bonchev3",                                           # 3014
+    "graphDistanceComplexity",                            # 3015
+    "distanceDegreeMIC",                                  # 3016
+    "distanceDegreeEquality",                             # 3017
+    "distanceDegreeCompactness",                          # 3018
+    "informationLayerIndex"                               # 3019
   ),
   # group 4000
   c(
@@ -183,7 +225,12 @@ calculateDescriptors <- function(graphs, ..., labels = FALSE) {
     .metaInfoTheoreticGCM("pathlength", "exp"),           # 5005
     .metaInfoTheoreticGCM("pathlength", "lin"),           # 5006
     .metaInfoTheoreticGCM("degree", "exp"),               # 5007
-    .metaInfoTheoreticGCM("degree", "lin")                # 5008
+    .metaInfoTheoreticGCM("degree", "lin"),               # 5008
+    .metaInfoTheoretic("infoTheoreticLabeledV1", "exp"),  # 5009
+    .metaInfoTheoretic("infoTheoreticLabeledV1", "lin"),  # 5010
+    .metaInfoTheoretic("infoTheoreticLabeledV2", NULL),   # 5011
+    .metaInfoTheoretic("infoTheoreticLabeledE", "exp"),   # 5012
+    .metaInfoTheoretic("infoTheoreticLabeledE", "lin")    # 5013
   ),
   # group 6000
   c(

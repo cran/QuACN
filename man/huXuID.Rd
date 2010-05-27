@@ -6,11 +6,11 @@
 huXuID(g, deg=NULL)
 }
 \arguments{
-  \item{g}{a graph as a graphNEL object.  Each edge must have a "weight"
+  \item{g}{a graph as a graphNEL object.  Each edge must have a "bond"
     data attribute containing one of the values 1 (single bond), 2
     (double bond), 3 (triple bond) or 1.5 (aromatic bond), and each
     vertex must have an "atom" data attribute specifying its atomic
-    number.}
+    number or chemical symbol.}
   \item{deg}{the degree of each node of g.  Will be automatically
     calculated if not supplied.}
 }
@@ -27,9 +27,9 @@ multiplicity.
 set.seed(987)
 g <- randomEGraph(LETTERS[1:10], 0.3)
 
-edgeDataDefaults(g, "weight") <- 1
-edgeData(g, "B", "I", "weight") <- 2
-edgeData(g, "A", "F", "weight") <- 1.5
+edgeDataDefaults(g, "bond") <- 1
+edgeData(g, "B", "I", "bond") <- 2
+edgeData(g, "A", "F", "bond") <- 1.5
 
 nodeDataDefaults(g, "atom") <- 6
 nodeData(g, "A", "atom") <- 8
