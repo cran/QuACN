@@ -1,0 +1,57 @@
+\name{balabanlike2}
+\alias{balabanlike2}
+\title{BALABAN-like information index XU(G)
+}
+\description{
+This method calculates the BALABAN-like information index X(G).
+}
+\usage{
+balabanlike2(g, dist = NULL)
+}
+
+\arguments{
+  \item{g}{a graph as a graphNEL object.
+%%     ~~Describe \code{g} here~~
+}
+  \item{dist}{the distance matrix of the graph. If the parameter is empty the distance
+matrix will be calculated within the function.
+%%     ~~Describe \code{dist} here~~
+}
+}
+\details{This method calculates the BALABAN-like information index U(G).
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+It return the BALABAN-like information index X(G).
+}
+\references{ A. T. Balaban and T. S. Balaban, New Vertex Invariants and
+  Topological Indices of Chemical Graphs Based on Information on
+  Distances., J. Math. Chem., 1991, 8:383-397
+  
+}
+\author{
+Laurin Mueller <laurin@eigenlab.net>
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+library(graph)
+library(RBGL)
+library(Rgraphviz)
+set.seed(123)
+g <- randomGraph(1:8, 1:5, 0.36)
+plot(g,"neato")
+
+#calculate Distance Matrix
+mat.dist <- distanceMatrix(g)
+
+balabanlike2(g,mat.dist)
+}
+\keyword{graphs}

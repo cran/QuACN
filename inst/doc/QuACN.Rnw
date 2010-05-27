@@ -1,0 +1,438 @@
+%\VignetteIndexEntry{QuACN}
+\documentclass[a4paper]{article}
+\usepackage{hyperref} 
+\usepackage[hmargin=.75in,vmargin=1in]{geometry}
+\usepackage[american]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{caption}
+\usepackage{textcomp}
+\usepackage{epsfig,graphicx}
+\usepackage{xcolor}
+\usepackage{amsfonts,amsmath,amssymb}
+\usepackage{fixltx2e} % Fixing numbering problem when using figure/table* 
+\usepackage{booktabs}
+
+\title{Using QuACN to Analyze Complex Biological Networks}
+\author{Laurin M\"uller}
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Overview}
+This vignette provides an overview about the usage of QuACN. 
+
+Chapter \ref{sec:nw} will give you an idea how to import already exiting networks. In Chapter \ref{sec:desc} a brief description of the implemented measures is presented, and it demonstrates how to call the related method in R.
+
+
+
+\section{Networks}
+\label{sec:nw}
+<<echo=FALSE>>=
+library("graph")
+library("RBGL")
+library("Rgraphviz")
+@ 
+
+<<label=randGraph,include=FALSE>>=
+library("QuACN")
+set.seed(666)
+g <- randomGraph(1:8, 1:5, 0.36)
+plot(g,"neato")
+g
+@ 
+We generate a random graph with 8 nodes.  This graph will be used to explain the implemented methods. To analyze a network the network has to be represented by a \textit{graphNEL}-object, which is part of the Bioconductor \textit{graph} package.\\
+
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=.5\linewidth]{Rplots.pdf}
+%\end{center}
+%\caption{A Random graph to show the functionality of the methods.}
+%\label{fig:randGraph}
+%\end{figure}
+
+If you have already created networks that you want to analyze with QuACN, R offers several ways to import them. (It is important to know that networks have to be represented by \textit{graphNEL}-objects.) Note that there is no general procedure to get your networks into an R-workspace. Some possibilities to import network data are listed below:
+
+\begin{itemize}
+\item \textbf{Adjacency matrix}: A representation of your network as an adjacency matrix can be easily imported and converted into a \textit{graphNEL} object.
+\item \textbf{Node- and Edge-List}: With a list of nodes and Edges it is easy to create a \textit{graphNEL}-object.
+\item \textbf{read.graph()}: The \texttt{read.graph()} method of the \textit{graph}-package offers the possibility to import graphs that a represented in different formats. For details see the manual of the \textit{graph}-package.
+\item \textbf{System Biology Markup Language(SBML) \cite{Hucka2003}}: With the \textit{RSBML}-package it is possible to import SBML-Models.
+\item \textbf{igrah-package}: Networks created with the \textit{igraph}-package can be converted into graphNEL objects.
+\end{itemize}
+
+\section{Network Descriptors}
+\label{sec:desc}
+This section provides a overview of the network descriptors that are included in the QuACN package. Here we describe the respective descriptor and how to call it in R.\\
+
+Note that every descriptor has at least two parameters, the \textit{graphNEL}-object and the distance matrix representing the network. It is not necessary to pass the distance matrix to a function. If the parameters stays empty or is set to \textit{NULL} the distance matrix will be estimated within each function. But if you want to calculate more than one descriptor, it is recommended to calculate the distance matrix separately and pass it to each method. Some of the methods need the degree of each node or the adjacency matrix to calculate their results. If they were calculated once they should have kept for later use. Specially with large networks it saves a lot of time, not to calculate these parameters for each descriptor again, and will enhance the performance of your script.
+<<>>=
+mat.adj <- adjacencyMatrix(g)
+mat.dist <- distanceMatrix(g)
+vec.degree <- graph::degree(g)
+ska.dia <- diameter(g)
+ska.dia <- diameter(g,mat.dist)
+@ 
+\subsection{Descriptors Based on Distances in a Graph} \label{sec:dist}
+This section describes network measures based on distances in the network.
+\subsubsection*{ Wiener Index \cite{Wiener1947}:}
+\begin{equation}
+W(G):= \frac{1}{2} \sum_{i=1}^{|N|}\sum_{j=1}^{|N|}d(v_i,v_j).
+\end{equation}
+where $|N(G)|:=|N|$ denotes the number of Nodes of the complex network.
+$d(v_i,v_j)$ stands for shortest distances between $v_i,v_j \in V$.
+
+<<>>=
+wien <- wiener(g)
+wiener(g,mat.dist)
+@ 
+
+\subsubsection*{Hararay Index \cite{balaban_ivanciuc_2000}:}
+\begin{equation}
+H(G):= \frac{1}{2} \sum_{i=1}^{|N|}\sum_{j=1}^{|N|}(d(v_i,v_j))^{-1}, \quad i \ne j.
+\end{equation}
+<<>>=
+harary(g)
+harary(g,mat.dist)
+@ 
+\subsubsection*{Balaban J Index \cite{balaban_1982}:}
+\begin{equation}
+J(G):= \frac{|E|}{\mu + 1} \sum_{(v_i,v_j) \in E} [DS{_i}DS{_j}]^{- \frac{1}{2}},
+\end{equation}
+<<>>=
+balabanJ(g)
+balabanJ(g,mat.dist)
+@ 
+where $|E(G)|:= |E|$ denotes the number of edges of the complex network, $DS_i$ denotes the distance sum (row sum) of $v_i$ and $\mu := |E| + 1 - |N|$ denotes the cyclomatic number.
+
+\subsubsection*{Mean distance deviation \cite{skorobogatov}:}
+
+\begin{equation}
+\Delta\mu(G):= \frac{1}{N}\sum_{i=1}^{N}|\mu(v_i)- \bar{\mu}|,
+\end{equation}
+%
+where
+%
+\begin{equation}\label{dobrynin_eq1}
+\mu(v_i):= \sum_{j=1}^{N}d(v_i,v_j),
+\end{equation}
+%
+and
+\begin{equation}\label{dobrynin_eq2}
+\bar{\mu}:= \frac{2W}{N}.
+\end{equation}
+<<>>=
+meanDistanceDeviation(g)
+meanDistanceDeviation(g,mat.dist)
+@ 
+
+\subsubsection*{Compactness  \cite{doyle_1977}:}
+\begin{equation}
+C(G):= \frac{4W}{|N|(|N|-1)}.
+\end{equation}
+<<>>=
+compactness(g)
+compactness(g,mat.dist)
+compactness(g,mat.dist,wiener(g,mat.dist))
+@ 
+\subsubsection*{Product of Row Sums index \cite{schultz_1992}:}
+\begin{equation}
+\text{PRS}(G)= \prod_{i=1}^{|N|} \mu(v_i) \quad \mbox{or} \quad   \log \big(\text{PRS}(G)\big)= \log\left( \prod_{i=1}^{|N|} \mu(v_i) \right).
+\end{equation}
+
+
+<<>>=
+productOfRowSums(g,log=FALSE)
+productOfRowSums(g,log=TRUE)
+productOfRowSums(g,mat.dist,log=FALSE)
+productOfRowSums(g,mat.dist,log=TRUE)
+@ 
+\subsubsection*{Hyper-distance-path index \cite{todeschini_2002}}
+\begin{equation}
+D_P(G):= \frac{1}{2} \sum_{i=1}^{|N|} \sum_{j=1}^{|N|} d(v_i,v_j) +  \frac{1}{2} \sum_{i=1}^{|N|} \sum_{j=1}^{|N|}  {d(v_i,v_j) \choose 2}.
+\end{equation}
+
+<<>>=
+hyperDistancePathIndex(g)
+hyperDistancePathIndex(g,mat.dist)
+hyperDistancePathIndex(g,mat.dist,wiener(g,mat.dist))
+@ 
+
+
+\subsection{Descriptors Based on Other Graph-Invariants}
+\label{sec:otherInv}
+This section describes network measures based on other invariants than distances.
+
+
+\subsubsection*{Index of total adjacency \cite{bonchev_book_2005}:}
+\begin{equation}
+A(G):= \frac{1}{2} \sum_{i=1}^{|N|}\sum_{j=1}^{|N|}a_{ij}.
+\end{equation}
+<<>>=
+totalAdjacency(g)
+totalAdjacency(g,mat.adj)
+@ 
+
+\subsubsection*{Zagreb group indices \cite{diudea}:}
+\begin{equation}
+Z_1(G):= \sum_{i=1}^{|N|} k_{v_i},
+\end{equation}
+where $k_{v_i}$ is the degree of the node $v_i$.
+\begin{equation}
+Z_2(G):= \sum_{(v_i,v_j) \in E} k_{v_i} k_{v_j}.
+\end{equation}
+<<>>=
+zagreb1(g)
+zagreb1(g,vec.degree)
+zagreb2(g)
+zagreb2(g,vec.degree)
+@ 
+
+\subsubsection*{Randi\'{c} connectivity index \cite{li_gutman_2006}:}
+\begin{equation}
+R(G):= \sum_{(v_i,v_j) \in E} [k_{v_i} k_{v_j}]^{- \frac{1}{2}}.
+\end{equation}
+<<>>=
+randic(g)
+randic(g,vec.degree)
+@ 
+
+\subsubsection*{The complexity index B \cite{bonchev_book_2005}:}
+\begin{equation}
+B(G):= \sum_{i=1}^{|N|} \frac{k_{v_i}}{\mu(v_i)}.
+\end{equation}
+  
+
+<<>>=
+complexityIndexB(g)
+complexityIndexB(g,mat.dist)
+complexityIndexB(g,mat.dist,vec.degree)
+@ 
+\subsubsection*{Normalized edge complexity \cite{bonchev_book_2005}:}
+\begin{equation}
+E_N(G):=\frac{A(G)}{|N|^2}.
+\end{equation}
+<<>>=
+normalizedEdgeComplexity(g)
+normalizedEdgeComplexity(g,totalAdjacency(g,mat.adj))
+@ 
+
+\subsection{Classical entropy based descriptors}
+\label{sec:clE}
+These measures are based on grouping the elements of an arbitrary graph invariant (vertices, edges, and distances etc.) using an equivalence criterion.
+
+
+\subsubsection*{Topological information content \cite{mowshowitz_1,rashewsky}:}
+\begin{equation}\label{eq_mean_information_trucco}
+I^V_{orb}(G) := -  \sum_{i=1}^{k} \frac{|N^V_i|}{|N|} \log \left( \frac{|N^V_i|}{|N|} \right).
+\end{equation}
+%
+$|N^V_i|$ denotes the number of vertices belonging to the $i$-th vertex orbit.
+<<>>=
+topologicalInfoContent(g)
+topologicalInfoContent(g,mat.dist)
+topologicalInfoContent(g,mat.dist,vec.degree)
+@ 
+
+\subsubsection*{Bonchev - Trinajsti\'{c} indices \cite{bonchev_Trinajstic_1977}:}
+\begin{equation}
+I_D(G) := - \frac{1}{|N|}\log\left( \frac{1}{|N|} \right)- \sum_{i=1}^{\rho(G)} \frac{2k_i}{|N|^2}\log\left( \frac{2k_i}{|N|^2} \right), \label{eq_mean_information_bonchev}
+\end{equation}
+\begin{equation}
+I^W_D(G) := W(G) \log(W(G)) -  \sum_{i=1}^{\rho(G)} i k_i \log(i).
+\end{equation}
+%
+$k_i$ is the occurrence of a distance possessing value $i$ in the distance matrix of $G$.
+<<keep.source=TRUE>>=
+#I_D(G)
+bonchev1(g)
+bonchev1(g,mat.dist)
+#I^W_D(G)
+bonchev2(g)
+bonchev2(g,mat.dist)
+bonchev2(g,mat.dist,wiener(g))
+@
+\subsubsection*{BERTZ complexity index \cite{bertz_1981}:}
+\begin{equation}\label{eq_total_information_bertz}
+C(G):= 2N \log(|N|) - \sum_{i=1}^{k} |N_i| \log \left( |N_i| \right).
+\end{equation}
+%
+$|N_i|$ are the cardinalities of the vertex orbits as defined in Eqn.~(\ref{eq_mean_information_trucco}).
+
+<<>>=
+bertz(g)
+bertz(g,mat.dist)
+bertz(g,mat.dist,vec.degree)
+@ 
+\subsubsection*{Radial centric information index \cite{bonchev_2}:}
+\begin{equation}\label{radial_index}
+I_{C,R}(G) := \sum_{i=1}^{k} \frac{|N^e_i|}{|N|} \log \left( \frac{|N^e_i|}{|N|} \right).
+\end{equation}
+%
+$|N^e_i|$ is the number of vertices having the same eccentricity.
+<<>>=
+radialCentric(g)
+radialCentric(g,mat.dist)
+@ 
+\subsubsection*{Vertex degree equality-based information index \cite{bonchev_2}:}
+\begin{equation}
+I_{deg}(G) := \sum_{i=1}^{\bar{k}} \frac{|N^{k_v}_i|}{|N|} \log \left( \frac{|N^{k_v}_i|}{|N|} \right).
+\end{equation}
+%
+$|N^{k_v}_i|$ is the number of vertices with degree equal to $i$ and $\bar{k}:= \max_{v\in V}k_v$.
+<<>>=
+vertexDegree(g)
+vertexDegree(g,vec.degree)
+@ 
+\subsubsection*{Balaban-like information indices \cite{balaban_1991}:}
+\begin{eqnarray}
+U(G):= \frac{|E|}{\mu +1} \sum_{(v_i,v_j) \in E} [u(v_i)u(v_j)]^{- \frac{1}{2}}, \label{eq_balaban_U_index} \\
+X(G):= \frac{|E|}{\mu +1} \sum_{(v_i,v_j) \in E} [x(v_i)x(v_j)]^{- \frac{1}{2}}, \label{eq_balaban_X_index}
+\end{eqnarray}
+%
+where
+%
+\begin{eqnarray}
+u(v_i) &:=&  -  \sum_{j=1}^{\sigma(v_i) } \frac{j|S_j(v_i,G)|}{\mu(v_i)} \log\left( \frac{j}{\mu(v_i)} \right), \\
+x(v_i) &:=& - \mu(v_i) \log(d(v_i)) - y_i, \\
+y_i &:=& \sum_{j=1}^{\sigma(v_i) } j|S_j(v_i,G)| \log(j),\\
+\mu(v_i) &:=& \sum_{j=1}^{|N|}d(v_i,v_j) = \sum_{j=1}^{|N|} j|S_j(v_i,G)|.
+\end{eqnarray}
+
+<<keep.source=TRUE>>=
+#Balaban-like information index U(G)
+balabanlike1(g)
+balabanlike1(g,mat.dist)
+#Balaban-like information index X(G)
+balabanlike2(g)
+balabanlike2(g,mat.dist)
+@
+
+\subsubsection*{Graph vertex complexity index \cite{raychaudhury_1984}:}
+\begin{equation}
+I_V(G):= \sum_{i=1}^{N}v^c_i,
+\end{equation}
+where $v^c_i$ is the so-called vertex complexity expressed by
+\begin{equation}
+v^c_i:= \sum_{j=0}^{\sigma(v_i)} \frac{k^{v_i}_j}{N} \log \left( \frac{k^{v_i}_j}{N} \right).
+\end{equation}
+$k^{v_i}_k$ is the number of distances starting from $V_i \in V$ equal to $j$.
+<<>>=
+graphVertexComplexity(g)
+graphVertexComplexity(g,mat.dist)
+@ 
+
+\subsection{Parametric Graph Entropy Measures}
+\label{sec:dE}
+Measures of this group \cite{dehmer_functionals_2008,dehmer_varmuza_2009} assign a probability value to each vertex of the network using a so-called information functional $f$
+which captures structural information of the network $G$. We yield \cite{dehmer_functionals_2008},
+\begin{equation}\label{eq:if}
+I_{f}(G):=-\sum_{i=1}^{|N|}{\frac{f(v_i)}{\sum_{j=1}^{|N|}f(v_j)} \log\left(\frac{f(v_i)}{\sum_{j=1}^{|N|}f(v_j)}\right)},
+\end{equation}
+%
+where $I_{f}(G)$ represents a family of graph entropy \cite{dehmer_functionals_2008} measures depending on the information functional.
+Further we implemented the following measurement\cite{dehmer_varmuza_2009}:
+\begin{equation}\label{eq:dist}
+I^{\lambda}_{f}(G) := \lambda \left( \log(|N|) + \sum_{i=1}^{|N|}{p(v_i)\log(p(v_i))} \right),
+\end{equation}
+\begin{equation}\label{eq:pis}
+p(v_i):={\frac{f(v_i)}{\sum_{j=1}^{|N|}f(v_j)}},
+\end{equation}
+where $p^V(v_i)$ are the vertex probabilities, $\lambda > 0$ a scaling constant. This measure can be interpreted as the distance between the entropy defined in equation \ref{eq:if} and maximum entropy ($\log(|N|)$).
+
+We integrated 3 different information functionals:
+
+\begin{enumerate}
+\item An information functional using the j-spheres (\textit{"sphere"}):
+\begin{equation}
+\label{eq:spherfunct}
+f^{V}(v_i):= c_1|S_1(v_i,G)| + c_2|S_2(v_i,G)| + \cdots + c_{\rho(G)}|S_{\rho(G)}(v_i,G)|,
+\end{equation}
+where $ c_k > 0$.
+
+\item An information functional using path lengths (\textit{"pathlength"}):
+\begin{equation}
+  f^{P_2}(v_i) := c_1l(P(L_G(v_i,1))) + c_2l(P(L_G(v_i,2))) + \cdots + c_{\rho(G)}l(P(L_G(v_i,\rho(G)))),
+\end{equation}
+where $ c_k > 0$.
+\item An information functional using vertex centrality(\textit{"vertcent"}) :
+\begin{equation} 
+  f^{C_2}(v_i) := c_1\beta^{L_G(v_i,1)}(v_i) + c_2\beta^{L_G(v_i,2)}(v_i) + \cdots + c_{\rho(G)}\beta^{L_G(v_i,\rho(G))}(v_i),
+\end{equation}
+where $ c_k > 0$.
+\end{enumerate}
+
+
+
+We implemented 4 different settings (as example settings) of the weighting parameter $c_i$:
+
+\begin{enumerate}
+\item constant
+\begin{equation}
+\label{eq:lin}
+c_1:= 1,\, c_2:=  1, \ldots, \, c_{\rho(G)}:= 1.
+\end{equation}
+
+\item linear
+\begin{equation}
+\label{eq:lin}
+c_1:= \rho(G),\, c_2:= \rho(G)-1, \ldots, \, c_{\rho(G)}:= 1.
+\end{equation}
+
+\item quadratic
+\begin{equation}
+\label{eq:exp}
+c_{1}:= \rho(G)^2, c_{2}:= (\rho(G)-1)^2, \ldots, c_{\rho(G)}:= 1.
+\end{equation}
+\item exponential
+\begin{equation}
+\label{eq:exp}
+c_{1}:= \rho(G), c_{2}:= \rho(G)e^{-1}, \ldots, c_{\rho(G)}:= \rho(G)e^{-\rho(G) + 1}.
+\end{equation}
+$\rho(G)$ represents the diameter of the network.
+
+\end{enumerate}
+
+To call this type of network measure we provide the method \textit{infoTheoreticGCM}. 
+It has following input parameters:
+\begin{itemize}
+\item \textit{g}: the network as a graphNEL object - it is the only mandatory parameter
+\item \textit{dist}: the distance matrix of g
+\item \textup{coeff}: specifies the weighting parameter: "const", "lin", "quad", "exp", "const" or "cust" are available constants. If it is set to
+    "cust" you have to specify your customized weighting schema with the parameter \textit{custCoeff}.
+\item \textit{infofunct}: specifies the information functional: "sphere", "pathlength" or "vertcent" are available settings.
+\item \textit{lamda}: scaling constant for the distance, default set to 1000.
+\item \textit{custCoeff}: specifies the customized weighting schema. To use it you need to set \textit{coeff}="const".
+\end{itemize}
+
+The method returns a list with following entries:
+\begin{itemize}
+\item \textit{entropy}: contains the entropy, see formula \ref{eq:if} 
+\item \textit{distance}: contains the distance described in formula \ref{eq:dist}
+\item \textit{pis}: contains the probability distribution, see formula \ref{eq:pis}
+\item \textit{fvi}: contains the values of the used information functional for each vertex $v_i$
+\end{itemize}
+
+
+<<>>=
+l1 <- infoTheoreticGCM(g)
+l2 <- infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lamda=1000)
+l3 <- infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lamda=1000)
+l4 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lamda=4000)
+l5 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lamda=1000)
+l1
+l5
+@ 
+
+\section{Session Info}
+<<>>=
+sessionInfo()
+@ 
+\bibliographystyle{IEEEtran}
+\bibliography{QuACN}
+
+\end{document}
+
+% LocalWords:  PRS productOfRowSums hyperDistancePathIndex ij totalAdjacency
+% LocalWords:  indices zagreb randic complexityIndexB normalizedEdgeComplexity
+% LocalWords:  topologicalInfoContent Bonchev Trinajsti bonchev BERTZ vertcent
+% LocalWords:  pathlength
