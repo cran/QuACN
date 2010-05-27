@@ -17,9 +17,7 @@ graphVertexComplexity(g, dist = NULL)
 %%     ~~Describe \code{dist} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{This method returns the Graph Vertex Complexity.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
@@ -34,15 +32,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 \author{Laurin Mueller <laurin@eigenlab.net>
 %%  ~~who you are~~
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 
 library(RBGL)

@@ -14,7 +14,7 @@
 \usepackage{booktabs}
 
 \title{Using QuACN to Analyze Complex Biological Networks}
-\author{Laurin AJ Mueller, Matthias Dehmer}
+\author{Laurin AJ Mueller, Karl G Kugler, Matthias Dehmer}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -59,6 +59,15 @@ If you have already created networks that you want to analyze with QuACN, R offe
 \item \textbf{System Biology Markup Language(SBML) \cite{Hucka2003}}: With the \textit{RSBML}-package it is possible to import SBML-Models.
 \item \textbf{igrah-package}: Networks created with the \textit{igraph}-package can be converted into graphNEL objects.
 \end{itemize}
+
+\subsection{Extract the Largest Connected Subgraph}
+Many of the topological network descriptors that are implemented in \texttt{QuACN} only work on connected graphs. Often this is not the case with biological networks, so that the largest connected component (LCC) has to be extracted first. For extracting the LCC we provide the method \texttt{getLargestSubgraph(g)}, as shown in \cite{Hahne2008}:
+<<>>=
+g2 <- randomGraph(paste("A",1:100, sep=""), 1:4, p=0.03)
+lcc <- getLargestSubgraph(g2)
+lcc
+
+@
 
 \section{Network Descriptors}
 \label{sec:desc}
@@ -428,6 +437,47 @@ l4 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=40
 l5 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
 l1
 l5
+@ 
+
+\subsection{Eigenvalue-based Descriptors}
+This class contains Eigenvalue-based Descriptors proposed in Dehmer et. al \cite{dehmer_degree_2010}. With this function it is possible to calculate 5 descriptors ($H_{M_s(G)}$, $S_{M_s(G)}$ , $IS_{M_s(G)}$, $P_{M_s(G)}$, $IP_{M_s(G)}$) for 10 different matrices:
+
+\begin{enumerate}
+\item Adjacency matrix
+\item Laplacian matrix
+\item Distance matrix
+\item Distance path Matrix
+\item Augmented vertex degree matrix
+\item Extended adjacency matrix
+\item Connectivity matrix 
+\item Random Walk Markov matrix 
+\item Weighted structure function matrix $IM_1$
+\item Weighted structure function matrix $IM_2$
+\end{enumerate}
+
+For a detailed descripton of this classs see Dehmer et. al \cite{dehmer_degree_2010}.
+<<>>=
+##Matrices like in the paper
+##1. adjacency matrix
+eigenvalueBased(g,adjacencyMatrix,2)
+##2. Laplacian matrix
+eigenvalueBased(g,laplaceMatrix,2)
+##3. Distance matrix
+eigenvalueBased(g,distanceMatrix,2)
+##4. Distance path Matrix
+eigenvalueBased(g,distancePathMatrix,2)
+##5. Augmented vertex degree matrix
+eigenvalueBased(g,augmentedMatrix,2)
+##6. Extended adjacency matrix
+eigenvalueBased(g,extendedAdjacencyMatrix,2)
+##7. Connectivity matrix 
+eigenvalueBased(g,vertConnectMatrix,2) 
+##8. Random Walk markov matrix 
+eigenvalueBased(g,randomWalkMatrix,2)  
+##9. Weighted structure function matrix IM1
+eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
+##10. Weighted structure function matrix IM2
+eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
 @ 
 
 \section{Session Info}

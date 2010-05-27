@@ -15,31 +15,13 @@ getLabels(l)
 %%     ~~Describe \code{l} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+
+\value{This method returns the label of a descripor as expression.
 }
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
+\author{Laurin Mueller
 %%  ~~who you are~~
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 getLabels("wiener")
 

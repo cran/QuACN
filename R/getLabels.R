@@ -30,7 +30,12 @@ dehmerDistancdPath=expression(I[f^P[2]]^lambda),
 dehmerEntropyVertex=expression(I[f^C[2]]),
 dehmerDistanceVertex=expression(I[f^C[2]]^lambda),
 dehmerEntropyDegree=expression(I[f^deg]),
-dehmerDistanceDegree=expression(I[f^deg]^lambda)
+dehmerDistanceDegree=expression(I[f^deg]^lambda),
+eigenvalueBasedHMs=expression(H[M,s]),
+eigenvalueBasedSMs=expression(S[M,s]),
+eigenvalueBasedISMs=expression(IS[M,s]),
+eigenvalueBasedPMs=expression(P[M,s]),
+eigenvalueBasedIPMs=expression(IP[M,s])
 )
 
 return(labels[l])

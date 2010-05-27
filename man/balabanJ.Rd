@@ -30,15 +30,7 @@ It returns the Balaban J index.
 \author{
 Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 library(graph)
 library(RBGL)

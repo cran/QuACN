@@ -5,10 +5,7 @@
 \title{
 This package contains topological network descriptors to analyze complex networks.
 }
-\description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
-}
+\description{TODO}
 \details{
 \tabular{ll}{
 Package: \tab QuACN\cr
@@ -18,19 +15,15 @@ Date: \tab 2010-08-01\cr
 License: \tab LGPL\cr
 LazyLoad: \tab yes\cr
 }
-
 }
+
 \author{
-Laurin Mueller, laurin.mueller@umit.at
+Laurin Mueller, laurin@eigenlab.net
 Maintainer: Laurin Mueller <laurin@eigenlab.net>
 }
-\references{
-
-
-}
+\references{See the packages vignette.}
 \keyword{ package }
-\seealso{
-}
+
 \examples{
 
 rm(list=ls())
@@ -140,4 +133,16 @@ infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lambda=1000)
 infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lambda=1000)
 infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
 infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
+infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="degree",lambda=1000)
+##
+eigenvalueBased(g,adjacencyMatrix,2)
+eigenvalueBased(g,laplaceMatrix,2)
+eigenvalueBased(g,distanceMatrix,2)
+eigenvalueBased(g,distancePathMatrix,2)
+eigenvalueBased(g,augmentedMatrix,2)
+eigenvalueBased(g,extendedAdjacencyMatrix,2)
+eigenvalueBased(g,vertConnectMatrix,2) 
+eigenvalueBased(g,randomWalkMatrix,2)  
+eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
+eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
 }

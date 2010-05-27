@@ -15,9 +15,7 @@ normalizedEdgeComplexity(g, ita = NULL)
 %%     ~~Describe \code{ita} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{This method returns the Normalized Edge Complexity
 }
 \references{
@@ -25,12 +23,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
 
 library(RBGL)

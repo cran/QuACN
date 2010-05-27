@@ -1,55 +1,40 @@
 \name{adjacencyMatrix}
 \alias{adjacencyMatrix}
-\title{
-Adjacency Matrix
+\title{Adjacency Matrix
 }
-\description{
-Returns the adjacency matrix of a graph.
+\description{This method calculates the adjacency Matrix of a given graph.
 }
 \usage{
 adjacencyMatrix(g)
 }
 \arguments{
-  \item{g}{
-A graph as a graphNEL object.
+  \item{g}{a graph as a graphNEL object.
+%%     ~~Describe \code{g} here~~
 }
 }
-\details{
+
+\value{This method returns the adjacency Matrix of a given graph.
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
 }
-\value{
-Returns a matrix with "1" between connected vertices and "0" between not
-connected ones.
+\references{R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+%% ~put references to the literature/web site here ~
 }
-\references{
-  F. Harary. Graph Theory. Addison Wesley Publishing Company, 1969. Reading, MA, USA.
+\author{Laurin Mueller <laurin@eigenlab.net>
+%%  ~~who you are~~
 }
-\author{
-Laurin Mueller <laurin@eigenlab.net>
-}
-\note{
-}
-\seealso{
-}
+
 \examples{
-library(graph)
+
 library(RBGL)
 library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
 plot(g,"neato")
 
-#calculate Adjacency Matrix
-mat.adj <- adjacencyMatrix(g)
-
-#calculate Distance Matrix
-mat.dist <- distanceMatrix(g)
-
-#calculate the Degree of each node
-vec.degree <- graph::degree(g)
-
-#calculate the Diamter of a Graph
-ska.dia <- diameter(g)
-ska.dia <- diameter(g,mat.dist)
+adjacencyMatrix(g)
 }
-\keyword{ graphs }
-
+\keyword{graphs}

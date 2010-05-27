@@ -9,7 +9,7 @@
 }
 \usage{
 infoTheoreticGCM(g, dist = NULL, coeff = "lin", infofunct = "sphere",
-lambda = 1000, custCoeff=NULL, alpha=0.5)
+lambda = 1000, custCoeff=NULL, alpha=0.5, prec=53)
 }
 \arguments{
   \item{g}{a graph as a graphNEL object.
@@ -33,6 +33,11 @@ lambda = 1000, custCoeff=NULL, alpha=0.5)
 }
   \item{alpha}{alpha for degree degree association.
 }
+  \item{prec}{specifies the floating-point precision to use (currently
+    only implemented for degree-degree association).  Values up to 53
+    are handled with the built-in double data type; larger values
+    trigger the usage of Rmpfr.
+}
 }
 \details{For details see the vignette.
 }
@@ -48,14 +53,15 @@ lambda = 1000, custCoeff=NULL, alpha=0.5)
 \references{
 M. Dehmer, Information processing in complex networks: Graph entropy and
 information functionals, Applied Mathematics and Computation, 202:82-94, 2008
+
+Dehmer M., Emmert-Streib F., Tsoy R. Y., Varmuza K.: Quantifying Structural Complexity of Graphs: 
+Information Measures in Mathematical Chemistry. In: Putz M. (Editor): Quantum Frontiers of Atoms and Molecules in Physics, 
+Chemistry, and Biology,  Nova Science Publishers, to appear, 2010
+
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-\seealso{
-}
 \examples{
 
 library(RBGL)

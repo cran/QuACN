@@ -15,20 +15,13 @@ radialCentric(g, dist = NULL)
   \item{dist}{the distance matrix of the graph. If the parameter is empty the distance matrix will be calculated within the function.
 }
 }
-\details{
-}
+
 \value{This method returns the Radial Centric Information Index.
 }
 \references{
 R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
-}
-\note{
-}
-
-
-\seealso{
 }
 \examples{
 

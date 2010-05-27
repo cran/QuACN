@@ -12,8 +12,7 @@ wiener(g, dist = NULL)
   \item{dist}{the distance matrix of the graph. If the parameter is empty the distance matrix will be calculated within the function.
 }
 }
-\details{
-}
+
 \value{This method returns the Wiener index.
 }
 \references{
@@ -21,12 +20,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
 
 library(RBGL)

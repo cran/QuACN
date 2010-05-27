@@ -1,5 +1,8 @@
-infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lambda=1000, custCoeff=NULL, alpha=0.5){
+infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lambda=1000, custCoeff=NULL, alpha=0.5, prec=53){
   require("graph")
+  if (prec > 53)
+    require("Rmpfr")
+
   allowed.coeff <-  c("lin","quad","exp","const","cust")
   allowed.functionals <-  c("sphere","pathlength","vertcent","degree")
   # check if g is a graphNEL object
@@ -39,7 +42,7 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
   }else  if(infofunct==allowed.functionals[3]){#"vertcent"
     fvi <- .functionalLocalProperty(g, dist=dist, ci=ci)
   }else  if(infofunct==allowed.functionals[4]){#"degree"
-    fvi <- .functionalDegreeDegree(g, dist=dist, ci=ci, alpha=alpha)
+    fvi <- .functionalDegreeDegree(g, dist=dist, ci=ci, alpha=alpha, prec=prec)
   }
   ##calcualte the entrpy and the distance
   fvi.sum <- sum(fvi)
@@ -117,48 +120,18 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
   return (fvi)
 }
 
-.functionalDegreeDegree <- function(g, dist, ci, alpha){
-  require("igraph")
+.functionalDegreeDegree <- function(g, dist, ci, alpha, prec){
+  m <- adjacencyMatrix(g)
+  deg <- graph::degree(g)
+  size <- numNodes(g)
 
-  ig <- igraph.from.graphNEL(g)
-  deg <- igraph::degree(ig)
-  vs <- V(ig)
-  lvs <- length(vs$name)
-  fvi <- rep(0,lvs)
-  nam <- nodes(g)
-  #determine number of all possible shortest path
-  deltaG <- sapply(1:lvs,function(n){
-    asp <- get.all.shortest.paths(ig,from=(n-1))
-#      lvi <- table(sapply(asp,length)-1,exclude=0)
-#      tmp.sum <- sapply(1:max(as.numeric(names(lvi))),function(lpl){
-#        sum(1:lpl)
-#  })
-    lsp <- sapply(asp,length)
-    deltaGvi <- sapply(2:max(lsp),function(j){
-      Pj <- asp[lsp==j]
-      sj <- lapply(Pj, function(pjh){
-         deg[pjh+1]
-      })
-      deltaGvij <- lapply(sj, function(dd){
-         ddl<-length(dd)
-         abs(dd[1:(ddl-1)]-dd[2:ddl])
-      })
-          sum(unlist(deltaGvij))
-  })
-     deltaGvi 
-  })
+  expts <- .C("degdeg_exponents",
+    as.integer(m), as.integer(deg), as.integer(size),
+    as.double(ci), as.integer(length(ci)),
+    double(size))[[6]]
 
-  fvi <- sapply(deltaG, function(deltaGvi){
-     sum(deltaGvi*ci[1:length(deltaGvi)])
-  })
-  names(fvi) <- nam
-  #TODO: add names to vi
-  ret <- alpha^fvi
-#  if(is.nan(ret)){
-#     warning("Result is Not a Number (NaN) -> value was set to -999")
-#     return (-999)
-#  }else{
-#     return(ret)
-#  }
+  fvi <- alpha ^ if (prec > 53) mpfr(expts, prec) else expts
+  names(fvi) <- nodes(g)
+
+  fvi
 }
-

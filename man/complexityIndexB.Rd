@@ -18,8 +18,7 @@ a graph as a graphNEL object.
   \item{deg}{ the degree of each node
 }
 }
-\details{
-}
+
 \value{This returns calcualtes the complexity index B.
 }
 \references{
@@ -29,12 +28,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 \author{
   Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
 library(RBGL)
 library(Rgraphviz)

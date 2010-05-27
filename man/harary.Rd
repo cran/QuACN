@@ -15,15 +15,8 @@ harary(g, dist = NULL)
 %%     ~~Describe \code{dist} here~~
 }
 }
-\details{This method returns the Harary Index.
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+\value{It returns the Harary Index.
+
 }
 \references{
   R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
@@ -32,15 +25,7 @@ harary(g, dist = NULL)
 \author{Laurin Mueller <laurin@eigenlab.net>
 %%  ~~who you are~~
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 
 library(RBGL)

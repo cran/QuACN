@@ -1,1 +1,3 @@
+useDynLib(QuACN)
+
 exportPattern("^[[:alpha:]]+")

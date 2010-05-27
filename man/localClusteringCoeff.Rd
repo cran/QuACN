@@ -13,8 +13,7 @@ localClusteringCoeff(g, deg = NULL)
   \item{deg}{the degree of each node of the g.
 }
 }
-\details{
-}
+
 \value{This method returns the local clustering coefficient.
 }
 \references{
@@ -22,12 +21,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
 
 library(RBGL)

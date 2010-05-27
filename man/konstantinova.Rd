@@ -2,7 +2,7 @@
 \alias{konstantinova}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Konstantinova}
-\description{This method calculates the Konschtantinova index}
+\description{This method calculates the Konstantinova index}
 \usage{
 konstantinova(g, dist = NULL)
 }
@@ -15,15 +15,8 @@ konstantinova(g, dist = NULL)
 %%     ~~Describe \code{dist} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+
+\value{It returns the Konstantinova index.
 }
 \references{  E. V. Konstantinova and A. A. Paleev. Sensitivity of topological
   indices of polycyclic graphs. Vychisl. Sistemy, 136:38-48, 1990, In
@@ -35,15 +28,7 @@ konstantinova(g, dist = NULL)
   Laurin Mueller <laurin@eigenlab.net>
 %%  ~~who you are~~
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 
 library(QuACN)

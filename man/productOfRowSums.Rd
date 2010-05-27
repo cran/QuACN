@@ -21,9 +21,7 @@ productOfRowSums(g, dist = NULL, log = FALSE)
 %%     ~~Describe \code{log} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{This method returns the product of row sums.
 }
 \references{
@@ -31,12 +29,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
 
 library(RBGL)

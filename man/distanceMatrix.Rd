@@ -12,9 +12,7 @@ distanceMatrix(g)
 %%     ~~Describe \code{g} here~~
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{This method returns the distance Matrix of a given graph.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
@@ -28,15 +26,6 @@ distanceMatrix(g)
 \author{Laurin Mueller <laurin@eigenlab.net>
 %%  ~~who you are~~
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 
 \examples{
 
@@ -46,6 +35,6 @@ set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
 plot(g,"neato")
 
-degreeDistribution(g)
+distanceMatrix(g)
 }
 \keyword{graphs}

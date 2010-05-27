@@ -18,10 +18,8 @@ bonchev1(g, dist = NULL)
 matrix will be calculated within the function.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
+
+\value{It returns the magnitude-based information index by Bonchev I_D(G)
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -35,11 +33,7 @@ matrix and molecular branching, J. Chem. Phys., 67:4517-4533, 1977
 \author{
 Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-\seealso{
-}
 \examples{
 library(graph)
 library(RBGL)

@@ -30,14 +30,7 @@ bertz(g, dist = NULL, deg = NULL)
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
 
-}
-
-
-
-\seealso{
-}
 \examples{
 library(graph)
 library(RBGL)

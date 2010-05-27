@@ -14,8 +14,7 @@ compactness(g, dist = NULL, wien = NULL)
   \item{wien}{the Wiener index of the graph g (optional)
 }
 }
-\details{
-}
+
 \value{This returns the compactness of the graph.
 }
 \references{
@@ -24,11 +23,7 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 \author{
   Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-\seealso{
-}
 \examples{
 library(graph)
 library(RBGL)

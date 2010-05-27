@@ -22,15 +22,9 @@ matrix will be calculated within the function.
   the Wiener index of g.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{This method returns the magnitude-based information index by Bonchev I_D^W(G).
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+
 }
 \references{
   D. Bonchev and N. Trinajstic, Information theory, distance
@@ -40,15 +34,7 @@ matrix and molecular branching, J. Chem. Phys., 67:4517-4533, 1977
 \author{
  Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-  \code{\link{wiener}}
-}
 \examples{
 library(graph)
 library(RBGL)

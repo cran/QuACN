@@ -13,23 +13,23 @@ degreeDistribution(g, deg = NULL)
   \item{deg}{the distance matrix of the graph. If the parameter is empty the distance matrix will be calculated within the function.
 }
 }
-\details{
-}
+
 \value{This methods returns the degree distribution
 }
-\references{
+\references{TODO
 
 }
 \author{
 Laurin Mueller <laurin@eigenlab.net>
 }
-\note{
-}
 
-
-\seealso{
-}
 \examples{
+library(RBGL)
+library(Rgraphviz)
+set.seed(123)
+g <- randomGraph(1:8, 1:5, 0.36)
+plot(g,"neato")
 
+degreeDistribution(g)
 }
 \keyword{graphs}

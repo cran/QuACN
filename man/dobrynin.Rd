@@ -42,15 +42,7 @@ Skorobogatov V.A. and Dobrynin A.A., Metric analysis of graphs, match, pp. 105-1
 \author{
 Laurin AJ Mueller
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
 library(graph)
 library(RBGL)

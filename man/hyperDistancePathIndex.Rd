@@ -20,9 +20,7 @@ hyperDistancePathIndex(g, dist = NULL, wien = NULL)
 
 }
 }
-\details{
 
-}
 \value{This method returns the Hyper Distance Path Index.
 
 }
@@ -32,15 +30,7 @@ hyperDistancePathIndex(g, dist = NULL, wien = NULL)
 \author{Laurin Mueller <laurin@eigenlab.net>
 
 }
-\note{
 
-}
-
-
-
-\seealso{
-
-}
 \examples{
 library(RBGL)
 library(Rgraphviz)
