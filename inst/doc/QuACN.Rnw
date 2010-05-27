@@ -13,24 +13,53 @@
 \usepackage{fixltx2e} % Fixing numbering problem when using figure/table* 
 \usepackage{booktabs}
 
-\title{Using QuACN to Analyze Complex Biological Networks}
+\title{\texttt{\textbf{QuACN}}: \textbf{Qu}antitative \textbf{A}nalyze of \textbf{C}omplex \textbf{N}etworks}
 \author{Laurin AJ Mueller, Karl G Kugler, Matthias Dehmer}
 \begin{document}
 \maketitle
 \tableofcontents
 \section{Overview}
-This vignette provides an overview about the usage of QuACN. 
+For information about the actual build see the projects website:
+
+\begin{itemize}
+ \item R-Forge: \url{http://quacn.r-forge.r-project.org/}
+ \item CRAN: \url{http://cran.r-project.org/web/packages/QuACN/}
+\end{itemize}
+
+This vignette provides an overview about the usage of \texttt{QuACN}. 
 
 Chapter \ref{sec:nw} will give you an idea how to import already exiting networks. In Chapter \ref{sec:desc} a brief description of the implemented measures is presented, and it demonstrates how to call the related method in R.
 
+\subsection{Installation}
+\texttt{QuACN} uses the packages \texttt{graph} and \texttt{RBGL} from the \textit{Bioconductor} project. Before installing \texttt{QuACN}, \textit{Bioconductor} with the corresponding packages needs to be installed. For instructions see the \textit{Bioconductor} website:
 
+\begin{itemize}
+ \item Bioconductor: \url{http://www.bioconductor.org/}
+\end{itemize}
 
+Note, that \texttt{QuACN} also depends on the \texttt{Rmpfr} package. Therefore, the software GMP (\url{http://gmplib.org/}) and MPFR ( \url{http://www.mpfr.org/}) needs to be installed to install the package correctly:
+
+\begin{itemize}
+ \item Windows: The package should install without problems.
+ \item Ubuntu/Debian: Make sure that the libraries \textit{libgmp3-dev} and \textit{libmpfr-dev} are installed.
+\end{itemize}
+For more information see the corresponding websites, or the documentation of the \texttt{Rmpfr} package (\url{http://rmpfr.r-forge.r-project.org/}).
+
+After installing \textit{GMP} and \textit{MPFR} everything is ready to install \texttt{QuACN}. Other dependencies will be installed automatically during the installation. To install the package from \textit{CRAN} simply type: 
+
+<<echo=TRUE, eval=FALSE>>=
+install.packages("QuACN")
+@
 \section{Networks}
 \label{sec:nw}
+This section shows how to create networks in R to use them with \texttt{QuACN}.
+
+\subsection{graphNEL}
 <<echo=FALSE>>=
 library("graph")
 library("RBGL")
 @ 
+We generate a random graph with 8 nodes.  This graph will be used to explain the implemented methods. To analyze a network the network has to be represented by a \textit{graphNEL}-object, which is part of the Bioconductor \texttt{graph} package.\\
 
 <<label=randGraph,include=FALSE>>=
 library("QuACN")
@@ -38,17 +67,21 @@ set.seed(666)
 g <- randomGraph(1:8, 1:5, 0.36)
 g
 @ 
-We generate a random graph with 8 nodes.  This graph will be used to explain the implemented methods. To analyze a network the network has to be represented by a \textit{graphNEL}-object, which is part of the Bioconductor \textit{graph} package.\\
 
-%\begin{figure}
-%\begin{center}
-%\includegraphics[width=.5\linewidth]{Rplots.pdf}
-%\end{center}
-%\caption{A Random graph to show the functionality of the methods.}
-%\label{fig:randGraph}
-%\end{figure}
+\subsection{Adjacency Matrix}
+<<echo=FALSE>>=
+A <- adjacencyMatrix(g)
+@ 
 
-If you have already created networks that you want to analyze with QuACN, R offers several ways to import them. (It is important to know that networks have to be represented by \textit{graphNEL}-objects.) Note that there is no general procedure to get your networks into an R-workspace. Some possibilities to import network data are listed below:
+To create a \textit{graphNEL} object from an adjacency matrix $A$, just type following command:
+
+<<label=randGraph,include=FALSE>>=
+A
+g <- as(A,"graphNEL")
+g
+@
+
+If you have already created networks that you want to analyze with \texttt{QuACN}, R offers several ways to import them. (It is important to know that networks have to be represented by \textit{graphNEL}-objects.) Note that there is no general procedure to get your networks into an R-workspace. Some possibilities to import network data are listed below:
 
 \begin{itemize}
 \item \textbf{Adjacency matrix}: A representation of your network as an adjacency matrix can be easily imported and converted into a \textit{graphNEL} object.
@@ -64,12 +97,11 @@ Many of the topological network descriptors that are implemented in \texttt{QuAC
 g2 <- randomGraph(paste("A",1:100, sep=""), 1:4, p=0.03)
 lcc <- getLargestSubgraph(g2)
 lcc
-
 @
 
 \section{Network Descriptors}
 \label{sec:desc}
-This section provides a overview of the network descriptors that are included in the QuACN package. Here we describe the respective descriptor and how to call it in R.\\
+This section provides a overview of the network descriptors that are included in the \texttt{QuACN} package. Here we describe the respective descriptor and how to call it in R.\\
 
 Note that every descriptor has at least two parameters, the \textit{graphNEL}-object and the distance matrix representing the network. It is not necessary to pass the distance matrix to a function. If the parameters stays empty or is set to \textit{NULL} the distance matrix will be estimated within each function. But if you want to calculate more than one descriptor, it is recommended to calculate the distance matrix separately and pass it to each method. Some of the methods need the degree of each node or the adjacency matrix to calculate their results. If they were calculated once they should have kept for later use. Specially with large networks it saves a lot of time, not to calculate these parameters for each descriptor again, and will enhance the performance of your script.
 <<>>=
@@ -419,7 +451,7 @@ It has following input parameters:
 \item \textit{custCoeff}: specifies the customized weighting schema. To use it you need to set \textit{coeff}="const".
 \end{itemize}
 
-Note that some combinations of these settings can cause the descriptor to retrun \textit{NaN}. In that case you have to check for \textit{warnings}.
+Note that some combinations of these settings can cause the descriptor to return \textit{NaN}. In that case you have to check for \textit{warnings}.
 
 The method returns a list with following entries:
 \begin{itemize}
@@ -508,30 +540,7 @@ eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
 @
 \end{enumerate}
 
-For a detailed descripton of this classs see Dehmer et. al \cite{dehmer_degree_2010}.
-% <<>>=
-% ##Matrices like in the paper
-% ##1. adjacency matrix
-% eigenvalueBased(g,adjacencyMatrix,2)
-% ##2. Laplacian matrix
-% eigenvalueBased(g,laplaceMatrix,2)
-% ##3. Distance matrix
-% eigenvalueBased(g,distanceMatrix,2)
-% ##4. Distance path Matrix
-% eigenvalueBased(g,distancePathMatrix,2)
-% ##5. Augmented vertex degree matrix
-% eigenvalueBased(g,augmentedMatrix,2)
-% ##6. Extended adjacency matrix
-% eigenvalueBased(g,extendedAdjacencyMatrix,2)
-% ##7. Connectivity matrix 
-% eigenvalueBased(g,vertConnectMatrix,2) 
-% ##8. Random Walk markov matrix 
-% eigenvalueBased(g,randomWalkMatrix,2)  
-% ##9. Weighted structure function matrix IM1
-% eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
-% ##10. Weighted structure function matrix IM2
-% eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
-% @ 
+For a detailed description of this class see Dehmer et. al \cite{dehmer_degree_2010}.
 
 \section{Session Info}
 <<>>=
@@ -542,7 +551,3 @@ sessionInfo()
 
 \end{document}
 
-% LocalWords:  PRS productOfRowSums hyperDistancePathIndex ij totalAdjacency
-% LocalWords:  indices zagreb randic complexityIndexB normalizedEdgeComplexity
-% LocalWords:  topologicalInfoContent Bonchev Trinajsti bonchev BERTZ vertcent
-% LocalWords:  pathlength

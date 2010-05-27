@@ -1,4 +1,4 @@
-2b2cdf38da8e941f2bf09f2d09e6f4c4 *DESCRIPTION
+08be4ff79b0c964749ebce8e189895fc *DESCRIPTION
 003f89bc9eccb7c64f646b56db370987 *NAMESPACE
 41304b1e2f28172b2a4b1de1b8edc78c *R/adjacencyMatrix.R
 3b977683f5514f755023ce1172ef8b1e *R/augmentedMatrix.R
@@ -41,10 +41,9 @@ bc881c76b5d894426c277095a4bf09c3 *R/weightStrucFuncMatrix.R
 0b8387a498d9a9ac69d8227ac382d434 *R/wiener.R
 28a8a0134cfd56cc458ab5af3950bfeb *R/zagreb1.R
 9d4570042f6d8d9be1cbda4d484bfd34 *R/zagreb2.R
-88deb8ce0135876e663772d29780d2d5 *inst/doc/QuACN.Rnw
+092072736ada0066df6c3aad6137a083 *inst/doc/QuACN.Rnw
 704fbe1080af79e43e6e5538e99915fe *inst/doc/QuACN.bib
-76ab6856a7dbb059e5218910b15cd1d0 *inst/doc/QuACN.pdf
-de1aeda81e8c8ab6ded25df5ae2dbfab *inst/doc/Sweave.sty
+cf713f6ca44beb9f092e2c12f7e325a4 *inst/doc/QuACN.pdf
 6dec2baec2ed6c6c6ec5951de0e6c352 *man/QuACN-package.Rd
 870ea18d88156d1ac549710ef812119f *man/adjacencyMatrix.Rd
 f2bd86ba0d8f5c1647a76d06a282242b *man/augmentedMatrix.Rd
@@ -68,7 +67,7 @@ b86a2e2597fd33001224c218541e8cbb *man/getLargestSubgraph.Rd
 ca6741d3d7461d6834de31b83208c93e *man/graphVertexComplexity.Rd
 1a984b9855c3582538144bd6445445e4 *man/harary.Rd
 ab3e5f6ae5dd7b1a22952dbeb07808a8 *man/hyperDistancePathIndex.Rd
-3392bc4f50fa96dfc3254fb3e7be14d4 *man/infoTheoreticGCM.Rd
+e183801a791f06e7343f9cc1b59c9269 *man/infoTheoreticGCM.Rd
 d2c58bc08b384636197daa594d3a4d2d *man/konstantinova.Rd
 719678ed82f6ddfcc0f30b158ea3b0c3 *man/laplaceMatrix.Rd
 ca6cd7065338b3e00523e84b774dade2 *man/localClusteringCoeff.Rd
