@@ -24,7 +24,8 @@ topologicalInfoContent(g, dist = NULL, deg = NULL)
 \value{This method returns the Topological Information Content.}
   
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+A. Mowshowitz, Entropy and the Complexity of the Graphs I: An Index of the Relative Complexity of a Graph, Bull. Math. Biophys., vol. 30, pp. 175-204, 1968.
+N. Rashevsky, Life, Information Theory, and Topology, Bull. Math. Biophys., vol. 17, pp. 229-235, 1955.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
@@ -37,4 +38,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 topologicalInfoContent(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

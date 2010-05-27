@@ -15,10 +15,10 @@ wiener(g, dist = NULL)
 
 \value{This method returns the Wiener index.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+\references{H. Wiener, Structural Determination of Paraffin Boiling Points, Journal of the American Chemical Society, vol. 69, no. 1, pp. 17-20, Jan. 1947.
+
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -29,4 +29,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 wiener(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

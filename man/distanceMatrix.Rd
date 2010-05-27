@@ -20,10 +20,9 @@ distanceMatrix(g)
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
-\references{R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
-%% ~put references to the literature/web site here ~
+\references{F. Harary, Graph Theory, Addison-Wesley series in mathematics, Perseus Books, 1994.
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 %%  ~~who you are~~
 }
 
@@ -35,4 +34,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 distanceMatrix(g)
 }
-\keyword{graphs}
+\keyword{ graph matrices }

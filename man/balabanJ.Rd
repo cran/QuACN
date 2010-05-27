@@ -26,7 +26,7 @@ It returns the Balaban J index.
 \references{A. T. Balaban. Highly discriminating distance-based topological index. Chem.Phys.Lett., 89:383-397, 1991
 }
 \author{
-Laurin Mueller <laurin@eigenlab.net>
+Laurin Mueller
 }
 
 \examples{
@@ -40,4 +40,4 @@ mat.dist <- distanceMatrix(g)
 
 balabanJ(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

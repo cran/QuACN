@@ -40,7 +40,7 @@ This function return a list containing the 14 descriptors.
 Skorobogatov V.A. and Dobrynin A.A., Metric analysis of graphs, match, pp. 105-151, 1988.
 }
 \author{
-Laurin AJ Mueller
+Laurin Mueller
 }
 
 \examples{
@@ -54,4 +54,4 @@ dobrynin(g)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{graphs}
+\keyword{ descriptors }

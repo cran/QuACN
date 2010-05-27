@@ -21,9 +21,9 @@ zagreb1(g, deg = NULL)
 \value{This method returns the Zagreb group index 1.
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+M. V. Diudea, I. Gutman, and L. Jantschi, Molecular Topology. Nova Publishing, 2001, New York, NY, USA
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -34,4 +34,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 zagreb1(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

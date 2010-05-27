@@ -26,5 +26,5 @@ g <- randomGraph(1:8, 1:5, 0.36)
 laplaceMatrix(g)
 
 }
-\keyword{ laplacian }
+\keyword{ graph matrices }
 

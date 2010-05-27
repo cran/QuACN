@@ -26,10 +26,9 @@ graphVertexComplexity(g, dist = NULL)
 %% ...
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
-
+C. Raychaudhury, S. K. Ray, J. J. Ghosh, A. B. Roy, and S. C. Basak, Discrimination of Isomeric Structures using Information Theoretic Topological Indices, Journal of Computational Chemistry, vol. 5, pp. 581-588, 1984.
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 %%  ~~who you are~~
 }
 
@@ -41,4 +40,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 graphVertexComplexity(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

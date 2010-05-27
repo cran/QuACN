@@ -19,7 +19,7 @@ normalizedEdgeComplexity(g, ita = NULL)
 \value{This method returns the Normalized Edge Complexity
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+D. Bonchev and D. H. Rouvray, Complexity in Chemistry, Biology, and Ecology, ser. Mathematical and Computational Chemistry. Springer, 2005, New York, NY, USA.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
@@ -32,4 +32,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 normalizedEdgeComplexity(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

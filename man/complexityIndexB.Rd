@@ -21,12 +21,10 @@ a graph as a graphNEL object.
 
 \value{This returns calcualtes the complexity index B.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002library(graph)
-
+\references{D. Bonchev and D. H. Rouvray, Complexity in Chemistry, Biology, and Ecology, ser. Mathematical and Computational Chemistry. Springer, 2005, New York, NY, USA.
 }
 \author{
-  Laurin Mueller <laurin@eigenlab.net>
+  Laurin Mueller
 }
 
 \examples{
@@ -36,4 +34,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 complexityIndexB(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

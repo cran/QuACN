@@ -17,7 +17,7 @@ meanDistanceDeviation(g, dist = NULL)
 \value{This method returns Mean Distance Deviation.
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+Skorobogatov V.A. and Dobrynin A.A., Metric analysis of graphs, match, pp. 105-151, 1988.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
@@ -30,5 +30,5 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 meanDistanceDeviation(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }
 

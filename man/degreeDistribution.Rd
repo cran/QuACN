@@ -16,8 +16,8 @@ degreeDistribution(g, deg = NULL)
 
 \value{This methods returns the degree distribution
 }
-\references{TODO
-
+\references{
+Skorobogatov V.A. and Dobrynin A.A., Metric analysis of graphs, match, pp. 105-151, 1988.
 }
 \author{
 Laurin Mueller <laurin@eigenlab.net>
@@ -30,4 +30,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 degreeDistribution(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

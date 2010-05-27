@@ -42,13 +42,25 @@ lambda = 1000, custCoeff=NULL, alpha=0.5, prec=53)
 \details{For details see the vignette.
 }
 \value{
-  It returns a list with following items:
+  The returned list consists of the following items:
   \item{entropy}{contains the calculated entropy measure.}
   \item{distance}{contains the calculated distance measure.}
   \item{pis}{contains the calculated probability distribution.}
   \item{fvi}{contains the calculated values of the information
     functional, for each vetrex.}
 
+  If any of these values is NaN, please check if your parameters are
+  valid.  For infofunct="degree" in particular, the result might be
+  impossible to represent using a standard R numeric vector.  In this
+  case the "prec" parameter has to be set to a higher value.
+
+  If infofunct is "degree" and prec is greater than 53, the resulting
+  values will be of class "mpfr" (instead of "numeric" in all other
+  cases).  Note that if you use such a vector in a calculation,
+  arbitrary precision floating point arithmetics will be used
+  throughout, even if the other operands are regular double values.  You
+  can use "as.double" at any point to convert an "mpfr" vector to the
+  built-in "numeric" class (losing precision).
 }
 \references{
 M. Dehmer, Information processing in complex networks: Graph entropy and
@@ -59,7 +71,7 @@ Information Measures in Mathematical Chemistry. In: Putz M. (Editor): Quantum Fr
 Chemistry, and Biology,  Nova Science Publishers, to appear, 2010
 
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -75,4 +87,4 @@ infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
 infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
 infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="degree",lambda=1000)
 }
-\keyword{graphs}
+\keyword{ descriptors }

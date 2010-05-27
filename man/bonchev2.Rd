@@ -48,4 +48,4 @@ mat.dist <- distanceMatrix(g)
 bonchev2(g)
 bonchev2(g,mat.dist, wiener(g))
 }
-\keyword{graphs}
+\keyword{ descriptors }

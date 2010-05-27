@@ -25,7 +25,7 @@ konstantinova(g, dist = NULL)
 \author{
   Andreas Dander <andreas.dander@umit.at>
   
-  Laurin Mueller <laurin@eigenlab.net>
+  Laurin Mueller
 %%  ~~who you are~~
 }
 
@@ -42,5 +42,4 @@ konstantinova(g,dist=mat.dist)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ descriptors }

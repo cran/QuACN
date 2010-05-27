@@ -25,9 +25,11 @@ productOfRowSums(g, dist = NULL, log = FALSE)
 \value{This method returns the product of row sums.
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+H. P. Schultz, E. B. Schultz, and T. P. Schultz, Topological Organic Chemistry. 4. Graph Theory, Matrix
+Permanents, and Topological Indices of Alkanes, Journal of Chemical Information and Computer Sciences,
+vol. 32, no. 1, pp. 69-72, 1992.
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -38,4 +40,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 productOfRowSums(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

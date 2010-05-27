@@ -24,8 +24,8 @@ hyperDistancePathIndex(g, dist = NULL, wien = NULL)
 \value{This method returns the Hyper Distance Path Index.
 
 }
-\references{R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
-
+\references{
+R. Todeschini, V. Consonni, and R. Mannhold, Handbook of Molecular Descriptors. Weinheim, Germany. Wiley-VCH, 2002.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 
@@ -38,4 +38,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 degreeDistribution(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

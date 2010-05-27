@@ -18,8 +18,7 @@ radialCentric(g, dist = NULL)
 
 \value{This method returns the Radial Centric Information Index.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+\references{D. Bonchev, Information Theoretic Indices for Characterization of Chemical Structures. Research Studies Press, Chichester, 1983.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
@@ -31,4 +30,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 radialCentric(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

@@ -10,5 +10,7 @@ localClusteringCoeff <- function(g, deg=NULL){
   #lcc <- (2*length(edges(g)))/(deg*(deg-1))
   lcc <- igraph::transitivity(igraph.from.graphNEL(g), type='local') 
   names(lcc) <- nodes(g)
+  lcc[is.na(lcc)] <- 0
+
   return(lcc)
 }

@@ -23,7 +23,7 @@ The largest connected \code{graphNEL} object from \code{g}
 Florian Hahne, Wolfgang Huber, Robert Gentleman, Seth Falcon "Bioconductor Case Studies", Springer, 2008
 }
 \author{
-Karl Kugler karl@eigenlab.net
+Karl Kugler
 }
 \note{
 Code taken from Hahne et al. "Bioconductor Case Studies"
@@ -35,5 +35,5 @@ g <- randomGraph(paste("A",1:100, sep=""), 1:4, p=0.03)
 lcc <- getLargestSubgraph(g)
 lcc
 }
-\keyword{ manip }
+\keyword{ subgraphs }
 

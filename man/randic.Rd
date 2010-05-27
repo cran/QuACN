@@ -17,8 +17,7 @@ randic(g, deg = NULL)
 }
 \value{This method returns the Randic connectivity index.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+\references{X. Li and I. Gutman, Mathematical Aspects of Randi\'{c}-Type Molecular Structure Descriptors, ser. Mathematical Chemistry Monographs. University of Kragujevac and Faculty of Science Kragujevac, 2006.
 }
 \author{Laurin Mueller <laurin@eigenlab.net>
 }
@@ -31,4 +30,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 randic(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

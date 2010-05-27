@@ -21,9 +21,9 @@ vertexDegree(g, deg = NULL)
 \value{This method returns the Vertex degree equality-based information index.
 }
 \references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+D. Bonchev, Information Theoretic Indices for Characterization of Chemical Structures. Research Studies Press, Chichester, 1983.
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -34,4 +34,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 vertexDegree(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

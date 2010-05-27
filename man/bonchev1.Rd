@@ -45,4 +45,4 @@ mat.dist <- distanceMatrix(g)
 
 bonchev1(g,mat.dist)
 }
-\keyword{graphs}
+\keyword{ descriptors }

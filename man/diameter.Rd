@@ -16,10 +16,10 @@ diameter(g, dist = NULL)
 
 \value{This method returns the diameter of a given graph.
 }
-\references{TODO
+\references{F. Harary, Graph Theory, Addison-Wesley series in mathematics, Perseus Books, 1994.
 }
 \author{
-  Laurin Mueller <laurin@eigenlab.net>
+  Laurin Mueller
 }
 
 \examples{
@@ -30,4 +30,4 @@ g <- randomGraph(1:8, 1:5, 0.36)
 
 diameter(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

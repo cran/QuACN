@@ -1,20 +1,15 @@
 .weightStrucFuncMatrix <- function(coeff) {
   function(g) {
-    dist.mat <- distanceMatrix(g)
-    probvi <- infoTheoreticGCM(g,  coeff = coeff, infofunct = "sphere")$pis
-    n_nodes <- length(probvi)
-    PolyMat <- matrix(0, nrow = n_nodes, ncol = n_nodes)
-    for(i in 1:n_nodes) { 
-      for(j in 1:n_nodes) {
-        if(i != j) {
-          PolyMat[i,j] <- 1 - (abs(probvi[i]-probvi[j]))/2^dist.mat[i,j]
-        }
-        else {
-          PolyMat[i,j] <- 1
-        }
-      }
-    } 
-    PolyMat
+    dist <- distanceMatrix(g)
+    pis <- infoTheoreticGCM(g,  coeff = coeff, infofunct = "sphere")$pis
+    len <- length(pis)
+
+    # calculate diff[i, j] = abs(pis[i] - pis[j])
+    diff <- abs(matrix(pis, len, len, TRUE) - matrix(pis, len, len, FALSE))
+
+    polyMat <- 1 - diff / 2^dist
+    diag(polyMat) <- 1
+    polyMat
   }
 }
 

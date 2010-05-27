@@ -16,10 +16,10 @@ localClusteringCoeff(g, deg = NULL)
 
 \value{This method returns the local clustering coefficient.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
+\references{D. Watts, Small Worlds: The Dynamics of Networks Between Order and Randomness. Princeton Univ Pr, 2003.
+D. Watts and S. Strogatz, Collective dynamics of 'Small-World' Networks, Nature, vol. 393, no. 6684, pp. 440-442, 1998.
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -32,4 +32,4 @@ deg <- graph::degree(g)
 localClusteringCoeff(g)
 localClusteringCoeff(g,deg)
 }
-\keyword{graphs}
+\keyword{ descriptors }

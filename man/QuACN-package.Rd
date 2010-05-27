@@ -2,26 +2,14 @@
 \alias{QuACN-package}
 \alias{QuACN}
 \docType{package}
-\title{
-This package contains topological network descriptors to analyze complex networks.
+\title{QuACN: Quantitative Analysis of Complex Networks
 }
-\description{TODO}
-\details{
-\tabular{ll}{
-Package: \tab QuACN\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2010-08-01\cr
-License: \tab LGPL\cr
-LazyLoad: \tab yes\cr
-}
-}
+\description{This package offers a set of topological network measures to analyze complex Networks structurally.}
 
 \author{
-Laurin Mueller, laurin@eigenlab.net
-Maintainer: Laurin Mueller <laurin@eigenlab.net>
+Laurin Mueller
 }
-\references{See the packages vignette.}
+\references{L.A.J. Mueller, K.G. Kugler, A. Dander, A. Graber, M. Dehmer, QuACN: An R Package for Analyzing Complex Biological networks quantitatively, Bioinformatics, Vol. 27 no. 1 2011, pages 140-141.}
 \keyword{ package }
 
 \examples{

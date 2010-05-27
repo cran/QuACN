@@ -14,16 +14,10 @@ compactness(g, dist = NULL, wien = NULL)
   \item{wien}{the Wiener index of the graph g (optional)
 }
 }
-
 \value{This returns the compactness of the graph.
 }
-\references{
-R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
-}
-\author{
-  Laurin Mueller <laurin@eigenlab.net>
-}
-
+\references{asdf}
+\author{Laurin Mueller}
 \examples{
 library(graph)
 library(RBGL)
@@ -35,4 +29,4 @@ mat.dist <- distanceMatrix(g)
 
 compactness(g)
 }
-\keyword{graphs}
+\keyword{ descriptors }

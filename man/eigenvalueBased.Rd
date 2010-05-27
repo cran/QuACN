@@ -59,5 +59,5 @@ eigenvalueBased(g,weightStrucFuncMatrix_lin,2)
 ##10. Weighted structure function matrix IM2
 eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
 }
-\keyword{ eigenvalues }
+\keyword{ descriptors }
 

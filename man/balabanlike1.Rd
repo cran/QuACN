@@ -31,7 +31,7 @@ It return the BALABAN-like information index U(G).
   
 }
 \author{
-Laurin Mueller <laurin@eigenlab.net>
+Laurin Mueller
 }
 
 \examples{
@@ -46,4 +46,4 @@ mat.dist <- distanceMatrix(g)
 balabanlike1(g,mat.dist)
 }
 
-\keyword{graphs}
+\keyword{ descriptors }

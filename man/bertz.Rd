@@ -28,7 +28,7 @@ bertz(g, dist = NULL, deg = NULL)
   S. H. Bertz. The first general index of molecular complexity. Journal
   of the American Chemical Society, 103:3241-3243, 1981
 }
-\author{Laurin Mueller <laurin@eigenlab.net>
+\author{Laurin Mueller
 }
 
 \examples{
@@ -44,4 +44,4 @@ bertz(g,mat.dist)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{graphs}
+\keyword{ descriptors }
