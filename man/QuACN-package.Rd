@@ -136,8 +136,8 @@ graphVertexComplexity(g)
 graphVertexComplexity(g,mat.dist)
 ##
 infoTheoreticGCM(g)
-infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lamda=1000)
-infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lamda=1000)
-infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lamda=4000)
-infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lamda=1000)
+infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lambda=1000)
+infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lambda=1000)
+infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
+infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
 }

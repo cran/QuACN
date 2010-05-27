@@ -1,7 +1,7 @@
-infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamda=1000, custCoeff=NULL){
+infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lambda=1000, custCoeff=NULL, alpha=NULL){
   require("graph")
   allowed.coeff <-  c("lin","quad","exp","const","cust")
-  allowed.functionals <-  c("sphere","pathlength","vertcent")
+  allowed.functionals <-  c("sphere","pathlength","vertcent","degree")
   # check if g is a graphNEL object
   if(class(g)[1]!="graphNEL"){
     stop("'g' must be a 'graphNEL' object")
@@ -33,19 +33,20 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamd
   }
   ##calc functional
   if(infofunct==allowed.functionals[1]){#"sphere"
-    fvi <- .functionalJSphere(g,dist=dist,ci=ci)
+    fvi <- .functionalJSphere(g, dist=dist, ci=ci)
   }else  if(infofunct==allowed.functionals[2]){#"pathlength"
-    fvi <- .functionalPathlength(g,dist=dist,ci=ci)
+    fvi <- .functionalPathlength(g, dist=dist, ci=ci)
   }else  if(infofunct==allowed.functionals[3]){#"vertcent"
-    fvi <- .functionalLocalProperty(g,dist=dist,ci=ci)
+    fvi <- .functionalLocalProperty(g, dist=dist, ci=ci)
+  }else  if(infofunct==allowed.functionals[4]){#"degree"
+    fvi <- .functionalDegreeDegree(g, dist=dist, ci=ci, alpha=alpha)
   }
-
   ##calcualte the entrpy and the distance
   fvi.sum <- sum(fvi)
   pis <- fvi/fvi.sum
   itgcm <- list()
   itgcm[["entropy"]] <- (-sum(pis*log2(pis)))
-  itgcm[["distance"]] <- (lamda*(log2(length(pis)) - itgcm[["entropy"]]))
+  itgcm[["distance"]] <- (lambda*(log2(length(pis)) - itgcm[["entropy"]]))
   itgcm[["pis"]] <- pis
   itgcm[["fvis"]] <- fvi
   return (itgcm)
@@ -112,3 +113,47 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamd
   names(fvi) <- nam
   return (fvi)
 }
+
+.functionalDegreeDegree <- function(g, dist, ci, alpha){
+  require("igraph")
+
+  ig <- igraph.from.graphNEL(g)
+  deg <- igraph::degree(ig)
+  vs <- V(ig)
+  lvs <- length(vs$name)
+  fvi <- rep(0,lvs)
+  nam <- nodes(g)
+  #determine number of all possible shortest path
+  deltaG <- sapply(1:lvs,function(n){
+  asp <- get.all.shortest.paths(ig,from=(n-1))
+      lvi <- table(sapply(asp,length)-1,exclude=0)
+      tmp.sum <- sapply(1:max(as.numeric(names(lvi))),function(lpl){
+        sum(1:lpl)
+  })
+  lsp <- sapply(asp,length)
+  deltaGvi <- sapply(2:max(lsp),function(j){
+      Pj <- asp[lsp==j]
+      sj <- lapply(Pj, function(pjh){
+         deg[pjh+1]
+      })
+      deltaGvij <- lapply(sj, function(dd){
+         ddl<-length(dd)
+         abs(dd[1:(ddl-1)]-dd[2:ddl])
+      })
+          sum(unlist(deltaGvij))
+  })
+     deltaGvi 
+  })
+
+  fvi <- sapply(deltaG, function(deltaGvi){
+     sum(deltaGvi*ci[1:length(deltaGvi)])
+  })
+
+  if(!is.null(alpha)){
+     return(alpha^fvi)
+  }else{
+     return(fvi)
+     #todo check for max entrpy (=all zero)
+  }
+}
+

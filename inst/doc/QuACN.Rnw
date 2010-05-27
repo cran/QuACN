@@ -14,7 +14,7 @@
 \usepackage{booktabs}
 
 \title{Using QuACN to Analyze Complex Biological Networks}
-\author{Laurin M\"uller}
+\author{Laurin AJ Mueller, Matthias Dehmer}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -339,7 +339,7 @@ p(v_i):={\frac{f(v_i)}{\sum_{j=1}^{|N|}f(v_j)}},
 \end{equation}
 where $p^V(v_i)$ are the vertex probabilities, $\lambda > 0$ a scaling constant. This measure can be interpreted as the distance between the entropy defined in equation \ref{eq:if} and maximum entropy ($\log(|N|)$).
 
-We integrated 3 different information functionals:
+We integrated 4 different information functionals:
 
 \begin{enumerate}
 \item An information functional using the j-spheres (\textit{"sphere"}):
@@ -359,6 +359,8 @@ where $ c_k > 0$.
   f^{C_2}(v_i) := c_1\beta^{L_G(v_i,1)}(v_i) + c_2\beta^{L_G(v_i,2)}(v_i) + \cdots + c_{\rho(G)}\beta^{L_G(v_i,\rho(G))}(v_i),
 \end{equation}
 where $ c_k > 0$.
+\item Calculates the degree degree association index(\textit{"degree"}) :
+
 \end{enumerate}
 
 
@@ -368,7 +370,7 @@ We implemented 4 different settings (as example settings) of the weighting param
 \begin{enumerate}
 \item constant
 \begin{equation}
-\label{eq:lin}
+\label{eq:const}
 c_1:= 1,\, c_2:=  1, \ldots, \, c_{\rho(G)}:= 1.
 \end{equation}
 
@@ -400,7 +402,7 @@ It has following input parameters:
 \item \textup{coeff}: specifies the weighting parameter: "const", "lin", "quad", "exp", "const" or "cust" are available constants. If it is set to
     "cust" you have to specify your customized weighting schema with the parameter \textit{custCoeff}.
 \item \textit{infofunct}: specifies the information functional: "sphere", "pathlength" or "vertcent" are available settings.
-\item \textit{lamda}: scaling constant for the distance, default set to 1000.
+\item \textit{lambda}: scaling constant for the distance, default set to 1000.
 \item \textit{custCoeff}: specifies the customized weighting schema. To use it you need to set \textit{coeff}="const".
 \end{itemize}
 
@@ -415,10 +417,10 @@ The method returns a list with following entries:
 
 <<>>=
 l1 <- infoTheoreticGCM(g)
-l2 <- infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lamda=1000)
-l3 <- infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lamda=1000)
-l4 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lamda=4000)
-l5 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lamda=1000)
+l2 <- infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lambda=1000)
+l3 <- infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lambda=1000)
+l4 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
+l5 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
 l1
 l5
 @ 

@@ -2,7 +2,7 @@
 \alias{konstantinova}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Konstantinova}
-\description{This method calculates the Konstantinova index}
+\description{This method calculates the Konschtantinova index}
 \usage{
 konstantinova(g, dist = NULL)
 }
