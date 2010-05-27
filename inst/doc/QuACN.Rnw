@@ -30,14 +30,12 @@ Chapter \ref{sec:nw} will give you an idea how to import already exiting network
 <<echo=FALSE>>=
 library("graph")
 library("RBGL")
-library("Rgraphviz")
 @ 
 
 <<label=randGraph,include=FALSE>>=
 library("QuACN")
 set.seed(666)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 g
 @ 
 We generate a random graph with 8 nodes.  This graph will be used to explain the implemented methods. To analyze a network the network has to be represented by a \textit{graphNEL}-object, which is part of the Bioconductor \textit{graph} package.\\
@@ -363,16 +361,19 @@ where $ c_k > 0$.
 
 \item An information functional using path lengths (\textit{"pathlength"}):
 \begin{equation}
-  f^{P_2}(v_i) := c_1l(P(L_G(v_i,1))) + c_2l(P(L_G(v_i,2))) + \cdots + c_{\rho(G)}l(P(L_G(v_i,\rho(G)))),
+  f^{P}(v_i) := c_1l(P(L_G(v_i,1))) + c_2l(P(L_G(v_i,2))) + \cdots + c_{\rho(G)}l(P(L_G(v_i,\rho(G)))),
 \end{equation}
 where $ c_k > 0$.
 \item An information functional using vertex centrality(\textit{"vertcent"}) :
 \begin{equation} 
-  f^{C_2}(v_i) := c_1\beta^{L_G(v_i,1)}(v_i) + c_2\beta^{L_G(v_i,2)}(v_i) + \cdots + c_{\rho(G)}\beta^{L_G(v_i,\rho(G))}(v_i),
+  f^{C}(v_i) := c_1\beta^{L_G(v_i,1)}(v_i) + c_2\beta^{L_G(v_i,2)}(v_i) + \cdots + c_{\rho(G)}\beta^{L_G(v_i,\rho(G))}(v_i),
 \end{equation}
 where $ c_k > 0$.
-\item Calculates the degree degree association index(\textit{"degree"}) :
-
+\item Calculates the degree degree association index(\textit{"degree"}) \cite{dehmer_hindawi_2010}:
+\begin{equation} 
+  f^{\Delta}(v_i) := \alpha^{c_1 \Delta^G(v_i,1) + c_2 \Delta^G(v_i,2) + \cdots + c_{\rho(G)} \Delta^G(v_i,{\rho(G)})},
+\end{equation}
+where $ c_k > 0$, $1 \leq k \leq \rho(G)$ and $\alpha>0$ 
 \end{enumerate}
 
 
@@ -383,24 +384,24 @@ We implemented 4 different settings (as example settings) of the weighting param
 \item constant
 \begin{equation}
 \label{eq:const}
-c_1:= 1,\, c_2:=  1, \ldots, \, c_{\rho(G)}:= 1.
+c_1:= 1,\, c_2:=  1, \cdots, \, c_{\rho(G)}:= 1.
 \end{equation}
 
 \item linear
 \begin{equation}
 \label{eq:lin}
-c_1:= \rho(G),\, c_2:= \rho(G)-1, \ldots, \, c_{\rho(G)}:= 1.
+c_1:= \rho(G),\, c_2:= \rho(G)-1, \cdots, \, c_{\rho(G)}:= 1.
 \end{equation}
 
 \item quadratic
 \begin{equation}
 \label{eq:exp}
-c_{1}:= \rho(G)^2, c_{2}:= (\rho(G)-1)^2, \ldots, c_{\rho(G)}:= 1.
+c_{1}:= \rho(G)^2, c_{2}:= (\rho(G)-1)^2, \cdots, c_{\rho(G)}:= 1.
 \end{equation}
 \item exponential
 \begin{equation}
 \label{eq:exp}
-c_{1}:= \rho(G), c_{2}:= \rho(G)e^{1}, \ldots, c_{\rho(G)}:= \rho(G)e^{-\rho(G) + 1}.
+c_{1}:= \rho(G), c_{2}:= \rho(G)e^{1}, \cdots, c_{\rho(G)}:= \rho(G)e^{-\rho(G) + 1}.
 \end{equation}
 $\rho(G)$ represents the diameter of the network.
 
@@ -432,53 +433,105 @@ The method returns a list with following entries:
 <<>>=
 l1 <- infoTheoreticGCM(g)
 l2 <- infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lambda=1000)
-l3 <- infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="sphere",lambda=1000)
-l4 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
-l5 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
+l3 <- infoTheoreticGCM(g,mat.dist,coeff="const",infofunct="pathlength",lambda=4000)
+l4 <- infoTheoreticGCM(g,mat.dist,coeff="quad",infofunct="vertcent",lambda=1000)
+l5 <- infoTheoreticGCM(g,mat.dist,coeff="exp",infofunct="degree",lambda=1000)
 l1
 l5
 @ 
 
 \subsection{Eigenvalue-based Descriptors}
-This class contains Eigenvalue-based Descriptors proposed in Dehmer et. al \cite{dehmer_degree_2010}. With this function it is possible to calculate 5 descriptors ($H_{M_s(G)}$, $S_{M_s(G)}$ , $IS_{M_s(G)}$, $P_{M_s(G)}$, $IP_{M_s(G)}$) for 10 different matrices:
+This class contains Eigenvalue-based Descriptors proposed in Dehmer et. al \cite{dehmer_degree_2010}. 
+
+\begin{equation}
+H_{M_s(G)}=\sum_{i=1}^k \frac{|\lambda_i|^{\frac{1}{s}}}{\sum_{j=1}^k |\lambda_j|^{\frac{1}{s}}} \log \left( \frac{|\lambda_i|^{\frac{1}{s}}}{\sum_{j=1}^k |\lambda_j|^{\frac{1}{s}}} \right),
+\end{equation}
+
+\begin{equation}
+S_{M_s(G)}= |\lambda_1|^{\frac{1}{s}} + |\lambda_2|^{\frac{1}{s}} + \ldots + |\lambda_k|^{\frac{1}{s}},
+\end{equation}
+
+\begin{equation}
+IS_{M_s(G)}= \frac{1}{|\lambda_1|^{\frac{1}{s}} + |\lambda_2|^{\frac{1}{s}} + \ldots + |\lambda_k|^{\frac{1}{s}}},
+\end{equation}
+
+\begin{equation}
+P_{M_s(G)}=|\lambda_1|^{\frac{1}{s}} \cdot |\lambda_2|^{\frac{1}{s}}  \ldots  |\lambda_k|^{\frac{1}{s}},
+\end{equation}
+
+\begin{equation}
+IP_{M_s(G)}= \frac{1}{|\lambda_1|^{\frac{1}{s}} \cdot |\lambda_2|^{\frac{1}{s}}  \ldots  |\lambda_k|^{\frac{1}{s}}},
+\end{equation}
+
+With this function it is possible to calculate 5 descriptors ($H_{M_s(G)}$, $S_{M_s(G)}$ , $IS_{M_s(G)}$, $P_{M_s(G)}$, $IP_{M_s(G)}$) for 10 different matrices:
 
 \begin{enumerate}
 \item Adjacency matrix
+<<>>=
+eigenvalueBased(g,adjacencyMatrix,2)
+@ 
 \item Laplacian matrix
+<<>>=
+eigenvalueBased(g,laplaceMatrix,2)
+@
 \item Distance matrix
+<<>>=
+eigenvalueBased(g,distanceMatrix,2)
+@
 \item Distance path Matrix
+<<>>=
+eigenvalueBased(g,distancePathMatrix,2)
+@
 \item Augmented vertex degree matrix
+<<>>=
+eigenvalueBased(g,augmentedMatrix,2)
+@
 \item Extended adjacency matrix
-\item Connectivity matrix 
+<<>>=
+eigenvalueBased(g,extendedAdjacencyMatrix,2)
+@
+\item Vertex Connectivity matrix 
+<<>>=
+eigenvalueBased(g,vertConnectMatrix,2) 
+@
 \item Random Walk Markov matrix 
+<<>>=
+eigenvalueBased(g,randomWalkMatrix,2)  
+@
 \item Weighted structure function matrix $IM_1$
+<<>>=
+eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
+@
 \item Weighted structure function matrix $IM_2$
+<<>>=
+eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
+@
 \end{enumerate}
 
 For a detailed descripton of this classs see Dehmer et. al \cite{dehmer_degree_2010}.
-<<>>=
-##Matrices like in the paper
-##1. adjacency matrix
-eigenvalueBased(g,adjacencyMatrix,2)
-##2. Laplacian matrix
-eigenvalueBased(g,laplaceMatrix,2)
-##3. Distance matrix
-eigenvalueBased(g,distanceMatrix,2)
-##4. Distance path Matrix
-eigenvalueBased(g,distancePathMatrix,2)
-##5. Augmented vertex degree matrix
-eigenvalueBased(g,augmentedMatrix,2)
-##6. Extended adjacency matrix
-eigenvalueBased(g,extendedAdjacencyMatrix,2)
-##7. Connectivity matrix 
-eigenvalueBased(g,vertConnectMatrix,2) 
-##8. Random Walk markov matrix 
-eigenvalueBased(g,randomWalkMatrix,2)  
-##9. Weighted structure function matrix IM1
-eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
-##10. Weighted structure function matrix IM2
-eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
-@ 
+% <<>>=
+% ##Matrices like in the paper
+% ##1. adjacency matrix
+% eigenvalueBased(g,adjacencyMatrix,2)
+% ##2. Laplacian matrix
+% eigenvalueBased(g,laplaceMatrix,2)
+% ##3. Distance matrix
+% eigenvalueBased(g,distanceMatrix,2)
+% ##4. Distance path Matrix
+% eigenvalueBased(g,distancePathMatrix,2)
+% ##5. Augmented vertex degree matrix
+% eigenvalueBased(g,augmentedMatrix,2)
+% ##6. Extended adjacency matrix
+% eigenvalueBased(g,extendedAdjacencyMatrix,2)
+% ##7. Connectivity matrix 
+% eigenvalueBased(g,vertConnectMatrix,2) 
+% ##8. Random Walk markov matrix 
+% eigenvalueBased(g,randomWalkMatrix,2)  
+% ##9. Weighted structure function matrix IM1
+% eigenvalueBased(g,weightStrucFuncMatrix_lin,2) 
+% ##10. Weighted structure function matrix IM2
+% eigenvalueBased(g,weightStrucFuncMatrix_exp,2)
+% @ 
 
 \section{Session Info}
 <<>>=

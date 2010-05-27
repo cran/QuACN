@@ -28,14 +28,12 @@ Maintainer: Laurin Mueller <laurin@eigenlab.net>
 
 rm(list=ls())
 library("graph")
-library("Rgraphviz")
 library("RBGL")
 library("QuACN")
 
 ###
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 ###
 
 mat.adj <- adjacencyMatrix(g)

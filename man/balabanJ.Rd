@@ -18,9 +18,7 @@ matrix will be calculated within the function.
 }
 }
 \details{
-  This method calculates the Balaban J index:
- \deqn{H(G):= \frac{1}{2}\sum_{i=1}^{|N|}\sum_{j=1}^{|N|}(d(v_i,v_j))^{-1}, \quad i \ne j}
-
+  This method calculates the Balaban J index.
 }
 \value{
 It returns the Balaban J index.
@@ -34,10 +32,8 @@ Laurin Mueller <laurin@eigenlab.net>
 \examples{
 library(graph)
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 
 #calculate Distance Matrix
 mat.dist <- distanceMatrix(g)

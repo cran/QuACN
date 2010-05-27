@@ -65,11 +65,9 @@ Chemistry, and Biology,  Nova Science Publishers, to appear, 2010
 \examples{
 
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
 mat.dist <- distanceMatrix(g)
-plot(g,"neato")
 
 infoTheoreticGCM(g)
 infoTheoreticGCM(g,mat.dist,coeff="lin",infofunct="sphere",lambda=1000)

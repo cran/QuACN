@@ -33,12 +33,9 @@ The matrix function to calculate the desired matrix for the graph. For details s
 
 \examples{
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
 mat.dist <- distanceMatrix(g)
-plot(g,"neato")
-
 
 ##Matrices like in the paper
 ##1. adjacency matrix

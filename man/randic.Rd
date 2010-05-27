@@ -1,8 +1,8 @@
 \name{randic}
 \alias{randic}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Rancic connectivity index}
-\description{This method calculates the Rancic connectivity index.}
+\title{Randic connectivity index}
+\description{This method calculates the Randic connectivity index.}
 \usage{
 randic(g, deg = NULL)
 }
@@ -15,7 +15,7 @@ randic(g, deg = NULL)
 %%     ~~Describe \code{deg} here~~
 }
 }
-\value{This method returns the Rancic connectivity index.
+\value{This method returns the Randic connectivity index.
 }
 \references{
 R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors, Wiley-VCH, Weinheim, Germany, 2002
@@ -26,10 +26,8 @@ R. Todeschini and V. Consonni and R. Mannhold, Handbook of Molecular Descriptors
 \examples{
 
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 
 randic(g)
 }

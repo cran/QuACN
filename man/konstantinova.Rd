@@ -32,11 +32,9 @@ konstantinova(g, dist = NULL)
 \examples{
 
 library(QuACN)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
 mat.dist <- distanceMatrix(g)
-plot(g,"neato")
 
 konstantinova(g)
 konstantinova(g,dist=mat.dist)

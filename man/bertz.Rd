@@ -34,10 +34,8 @@ bertz(g, dist = NULL, deg = NULL)
 \examples{
 library(graph)
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 
 #calculate Distance Matrix
 mat.dist <- distanceMatrix(g)

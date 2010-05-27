@@ -25,14 +25,15 @@ harary(g, dist = NULL)
 \author{Laurin Mueller <laurin@eigenlab.net>
 %%  ~~who you are~~
 }
+\details{   This method calculates the Hararay index:
+\deqn{H(G):= \frac{1}{2}\sum_{i=1}^{|N|}\sum_{j=1}^{|N|}(d(v_i,v_j))^{-1}, \quad i \ne j}
+}
 
 \examples{
 
 library(RBGL)
-library(Rgraphviz)
 set.seed(123)
 g <- randomGraph(1:8, 1:5, 0.36)
-plot(g,"neato")
 
 harary(g)
 }
