@@ -3,6 +3,8 @@ getLargestSubgraph <- function(g){
   if(class(g) != "graphNEL"){
     stop("g needs to be of type graphNEL")
   }
+  stopifnot(.validateGraph(g))
+  
   cc.g <- connectedComp(g)
   cclens.g <- sapply(cc.g, length)
   #print("Subgraph distribution:")

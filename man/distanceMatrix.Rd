@@ -5,24 +5,27 @@
 \description{This method calculates the distance Matrix of a given graph.
 }
 \usage{
-distanceMatrix(g)
+distanceMatrix(g, keep.weights=FALSE)
 }
 \arguments{
-  \item{g}{a graph as a graphNEL object.
-%%     ~~Describe \code{g} here~~
-}
+  \item{g}{ The graphNEL object for which the distance matrix will be calculated.}
+  \item{keep.weights}{A flag indicating whether weights should be
+    considered when performing the conversion (DEFAULT= FALSE). \emph{currently ignored, added for later development}}
 }
 
-\value{This method returns the distance Matrix of a given graph.
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+\details{This method returns the distance Matrix of a given graph. If the
+  graph is weighted it will be treated as if it was an unweighted
+  graph.
+}
+\value{A distance matrix with dimensions V(g) x V(g).
+}
+\note{
+  Currently we ignore the edge weight information when calculating the
+  distance matrix. This will most likely change in future versions.
 }
 \references{F. Harary, Graph Theory, Addison-Wesley series in mathematics, Perseus Books, 1994.
 }
-\author{Laurin Mueller
+\author{Laurin Mueller, Karl Kugler
 %%  ~~who you are~~
 }
 
@@ -30,7 +33,7 @@ distanceMatrix(g)
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 distanceMatrix(g)
 }

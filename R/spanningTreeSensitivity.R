@@ -3,7 +3,8 @@ spanningTreeSensitivity <- function(g, one.eds=NULL) {
 
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
-
+  stopifnot(.validateGraph(g))
+  
   if (is.null(one.eds))
     one.eds <- edgeDeletedSubgraphs(g)
 

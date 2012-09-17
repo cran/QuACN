@@ -1,4 +1,6 @@
 distancePathMatrix <- function(g) {
+  stopifnot(.validateGraph(g))
+  
   dist.mat <- distanceMatrix(g)
   n_nodes <- nrow(dist.mat)
   Dis_Path_Mat <- matrix(0, nrow=n_nodes, ncol=n_nodes, byrow=TRUE)

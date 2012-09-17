@@ -1,0 +1,16 @@
+     citHeader("To cite package 'QuACN' in publications use:")
+    
+     citEntry(entry="article",
+              title = "QuACN: an R package for analyzing complex biological networks quantitatively",
+              author = personList(as.person("Laurin AJ Mueller"),
+                                  as.person("Karl G Kugler"),
+                                  as.person("Andreas Dander"),
+                                  as.person("Armin Graber"),
+                                  as.person("Matthias Dehmer")),
+              year = 2011,
+     	      journal="Bioinformatics",
+         volume="27",
+         pages="140-141",
+              textVersion =
+              paste("Mueller LAJ, Kugler KG, Dander A, Graber A, Dehmer M (2011) QuACN: an R package for analyzing complex biological networks quantitatively. Bioinformatics 27: 140-141")
+)

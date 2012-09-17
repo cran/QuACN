@@ -1,14 +1,16 @@
 symmetryIndex <- function(g, dist=NULL, deg=NULL) {
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
+  stopifnot(.validateGraph(g))
+  
   if (is.null(dist))
     dist <- distanceMatrix(g)
   if (is.null(deg))
     deg <- graph::degree(g)
 
-  ig <- igraph.from.graphNEL(g)
+  ig <- .G2IG(g)
   Ai <- .cardNi(g, dist, deg)
-  aut <- as.numeric(graph.automorphisms(ig)[["group_size"]])
+  aut <- as.numeric(igraph::graph.automorphisms(ig)[["group_size"]])
 
   1/numNodes(g) * sum(Ai * log2(Ai)) + log2(aut)
 }

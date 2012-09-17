@@ -1,4 +1,6 @@
 augmentedMatrix <- function(g) {
+  stopifnot(.validateGraph(g))
+
   dist.mat <- distanceMatrix(g)
   n_nodes <- nrow(dist.mat)
   Aug_Mat <- matrix(0, nrow=n_nodes, ncol=n_nodes, byrow=TRUE)

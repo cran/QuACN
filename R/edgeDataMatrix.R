@@ -1,6 +1,7 @@
 .edgeDataMatrix <- function(g, att) {
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
+  stopifnot(.validateGraph(g))
   if (is.null(edgeDataDefaults(g)[[att]]))
     stop(paste("edge attribute", att, "not set"))
 

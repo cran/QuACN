@@ -34,7 +34,7 @@ The matrix function to calculate the desired matrix for the graph. For details s
 \examples{
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 mat.dist <- distanceMatrix(g)
 
 ##Matrices like in the paper

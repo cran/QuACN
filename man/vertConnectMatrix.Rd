@@ -21,7 +21,7 @@ A graph as a graphNEL object.
 \author{Lavanya Sivakumar
 }
 \examples{library(RBGL)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 vertConnectMatrix(g)
 
 }

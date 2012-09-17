@@ -31,7 +31,7 @@ Code taken from Hahne et al. "Bioconductor Case Studies"
 
 \examples{
 set.seed(667)
-g <- randomGraph(paste("A",1:100, sep=""), 1:4, p=0.03)
+g <- randomGraph(paste("A",1:100, sep=""), 1:4, p=0.03, weights=FALSE)
 lcc <- getLargestSubgraph(g)
 lcc
 }

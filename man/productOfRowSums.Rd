@@ -36,7 +36,7 @@ vol. 32, no. 1, pp. 69-72, 1992.
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 productOfRowSums(g)
 }

@@ -56,17 +56,15 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
 
 
 .functionalPathlength <- function(g, dist,ci){
-  require("igraph0")
-
-  ig <- igraph.from.graphNEL(g)
-  vs <- V(ig)
+  ig <- .G2IG(g)
+  vs <- igraph::V(ig)
   lvs <- length(vs$name)
   fvi <- rep(0,lvs)
   nam <- nodes(g)
   #determine number of all possible shortest path
   for(n in 1:lvs){
     #f <- vs[vs$name==n] 
-    asp <- get.all.shortest.paths(ig,from=(n-1))
+    asp <- igraph::get.all.shortest.paths(ig,from=n)$res
     lvi <- table(sapply(asp,length)-1,exclude=0)
     fvi[n] <- sum(lvi*ci[1:length(lvi)])
   }
@@ -75,17 +73,16 @@ infoTheoreticGCM <- function(g, dist=NULL, coeff="lin", infofunct="sphere", lamb
 }
 
 .functionalLocalProperty <- function(g, dist,ci){
-  require("igraph0")
 
-  ig <- igraph.from.graphNEL(g)
-  vs <- V(ig)
+  ig <- .G2IG(g)
+  vs <- igraph::V(ig)
   lvs <- length(vs$name)
   fvi <- rep(0,lvs)
   nam <- nodes(g)
   #determine number of all possible shortest path
   for(n in 1:lvs){
     #f <- vs[vs$name==n] 
-    asp <- get.all.shortest.paths(ig,from=(n-1))
+    asp <- igraph::get.all.shortest.paths(ig,from=n)$res #changes between igraph0 and igraph >> $res
     lvi <- table(sapply(asp,length)-1,exclude=0)
     tmp.sum <- sapply(1:max(as.numeric(names(lvi))),function(lpl){
       sum(1:lpl)

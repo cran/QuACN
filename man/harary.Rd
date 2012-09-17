@@ -26,7 +26,7 @@ J. Devillers and A. T. Balaban, Eds. Gordon and Breach Science Publishers, 1999,
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 harary(g)
 }

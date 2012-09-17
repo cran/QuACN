@@ -30,7 +30,7 @@ D. Bonchev, Information Theoretic Indices for Characterization of Chemical Struc
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 vertexDegree(g)
 }

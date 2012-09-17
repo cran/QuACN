@@ -26,7 +26,7 @@ Skorobogatov V.A. and Dobrynin A.A., Metric analysis of graphs, match, pp. 105-1
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 meanDistanceDeviation(g)
 }

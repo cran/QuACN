@@ -34,7 +34,7 @@ N. Rashevsky, Life, Information Theory, and Topology, Bull. Math. Biophys., vol.
 
 library(RBGL)
 set.seed(123)
-g <- randomGraph(1:8, 1:5, 0.36)
+g <- randomGraph(1:8, 1:5, 0.36, weights=FALSE)
 
 topologicalInfoContent(g)
 }

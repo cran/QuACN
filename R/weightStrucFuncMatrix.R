@@ -1,5 +1,6 @@
 .weightStrucFuncMatrix <- function(coeff) {
   function(g) {
+    stopifnot(.validateGraph(g))
     dist <- distanceMatrix(g)
     pis <- infoTheoreticGCM(g,  coeff = coeff, infofunct = "sphere")$pis
     len <- length(pis)

@@ -4,6 +4,7 @@ eigenvalueBased <- function(g, matrix_function, s=1){
   if(class(g)[1]!="graphNEL"){
     stop("'g' must be a 'graphNEL' object")
   }
+  stopifnot(.validateGraph(g))
 
   M <- do.call(matrix_function,list(g))
 

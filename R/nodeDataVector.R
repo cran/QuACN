@@ -1,7 +1,8 @@
 .nodeDataVector <- function(g, att) {
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
-
+  stopifnot(.validateGraph(g))
+  
   convert <- identity
   if (att == "atom->symbol") {
     att <- "atom"

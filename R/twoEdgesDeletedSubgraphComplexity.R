@@ -3,7 +3,8 @@ twoEdgesDeletedSubgraphComplexity <- function(g, two.eds=NULL) {
 
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
-
+  stopifnot(.validateGraph(g))
+  
   if (is.null(two.eds))
     two.eds <- edgeDeletedSubgraphs(edgeDeletedSubgraphs(g))
 
