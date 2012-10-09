@@ -10,8 +10,7 @@ distanceMatrix <- function(g, keep.weights=FALSE) {
     stop("'g' has to be a 'graphNEL' object")
   }
   stopifnot(.validateGraph(g))
-  
-  if(any(unlist(edgeData(g, attr="weight")) >1) & keep.weights){
+  if(keep.weights & any(unlist(edgeWeights(g)) > 1)){
     warning("When calculating distanceMatrix() the edge weight information will be ignored")
   }
   g <- igraph::igraph.to.graphNEL(.G2IG(g, keep.weights=FALSE))

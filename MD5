@@ -1,4 +1,4 @@
-52d2534d0584eeec9bdb55c49b1eab15 *DESCRIPTION
+ece3e68522096730858798ee0a02977d *DESCRIPTION
 d59396008c42ddcd1c17ea8eac3f8381 *NAMESPACE
 fb5fa98dae969aabed5ad7679e9f05c0 *R/adjacencyMatrix.R
 8a111f80850809825688749d12a7b6e1 *R/atomBondConnectivity.R
@@ -26,7 +26,7 @@ aa3e5ab94d4fdfaaa4b6719c5b206e85 *R/distanceDegreeCentric.R
 76118bdf6e8b889c5336b35a19633e0d *R/distanceDegreeCompactness.R
 beb610e7a644b432f77dcae9a89efa51 *R/distanceDegreeEquality.R
 e3ea62a4e36f382c615706e136f98d61 *R/distanceDegreeMIC.R
-a6b91c4dde0e1786be21a996f0188560 *R/distanceMatrix.R
+a3395b21b1e10daed46e4311fcc5768d *R/distanceMatrix.R
 babec83c6ccd902d42dae6b006a1bebb *R/distancePathMatrix.R
 8d0bfd7c2226327d4e50499fd097b0d9 *R/dobrynin.R
 e4f6e06e9f84a84ca3b0b72dfff18835 *R/edgeApply.R
@@ -85,7 +85,7 @@ ba3d6b0bb5095c0a7e56ef4a65113799 *R/randic.R
 89d27f54182bca68d7206608ed258810 *R/topologicalInfoContent.R
 bf14560f96f4f48178bd278364fd22da *R/totalAdjacency.R
 3a6f54aedc4534fee532b4cbd294d7ba *R/twoEdgesDeletedSubgraphComplexity.R
-e9f920006381a03b44a2ff86513e201a *R/utilities.R
+679820bb86297cab404f63eb613dd503 *R/utilities.R
 3e691f846cb996bfd1125f4de85df159 *R/variableZagreb.R
 b082c0f70cee6467b99fdc1db58f4cb3 *R/vertConnectMatrix.R
 81344dc4eeee27b8239bbca575b2223b *R/vertexDegree.R
@@ -99,7 +99,7 @@ f55d2ed6f7ab9846fdc8b1a26be9a430 *R/weightedID.R
 0f494dc8b0f6ab2c489f94a091131fba *data/chemicalElements.csv.gz
 b0960b5076ab7c7eea2337ec661c2660 *inst/CITATION
 186647232463e9eb317d71a3837ced67 *inst/doc/QuACN.Rnw
-94fe37e9a70d5c7c80ebe238b0af7fb8 *inst/doc/QuACN.pdf
+30f42de25d3072d337ecb7bbb9fb2381 *inst/doc/QuACN.pdf
 d9bfec026a7ef41425d68f6223930406 *man/QuACN-package.Rd
 3556f903b2ad4bcc2c33537e8eba366e *man/adjacencyMatrix.Rd
 58e6f989c026fab4e48a7204285f197d *man/atomBondConnectivity.Rd

@@ -1,8 +1,8 @@
 Package: QuACN
 Type: Package
 Title: QuACN: Quantitative Analysis of Complex Networks
-Version: 1.7.3
-Date: 2012-09-17
+Version: 1.7.4
+Date: 2012-10-09
 Author: Laurin Mueller, Michael Schutte, Karl Kugler, Matthias Dehmer
 Maintainer: Laurin Mueller <laurin@eigenlab.net>
 Description: Quantitative Analysis of Complex Networks. This package
@@ -15,7 +15,7 @@ Depends: graph, RBGL, combinat, Rmpfr
 Imports: igraph
 Repository: CRAN
 Repository/R-Forge/Project: quacn
-Repository/R-Forge/Revision: 112
-Repository/R-Forge/DateTimeStamp: 2012-09-17 14:19:21
-Date/Publication: 2012-10-04 09:10:06
-Packaged: 2012-09-17 18:20:51 UTC; rforge
+Repository/R-Forge/Revision: 113
+Repository/R-Forge/DateTimeStamp: 2012-10-10 08:39:52
+Date/Publication: 2012-10-12 08:30:09
+Packaged: 2012-10-10 10:23:07 UTC; rforge
