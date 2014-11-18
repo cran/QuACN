@@ -1,6 +1,4 @@
 topologicalInfoContent <- function(g, dist=NULL, deg=NULL){
-  require("graph")
-  require("RBGL")
   if(class(g)[1]!="graphNEL"){
   stop("'g' must be a 'graphNEL' object")
   }

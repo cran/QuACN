@@ -1,6 +1,4 @@
 .edgeApply <- function(g, f, dupls=TRUE, simplify=TRUE) {
-  require("graph")
-
   if (class(g)[1] == "graphNEL")
     M <- adjacencyMatrix(g)
   else

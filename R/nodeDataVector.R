@@ -1,4 +1,5 @@
 .nodeDataVector <- function(g, att) {
+  ##  data(sysdata, envir=environment())
   if (class(g)[1] != "graphNEL")
     stop("'g' has to be a 'graphNEL' object")
   stopifnot(.validateGraph(g))
@@ -8,14 +9,15 @@
     att <- "atom"
     convert <- function(value) {
       if (is.character(value)) value
-      else as.character(chemicalElements[value, "symbol"])
+      else as.character(.chemicalElements()[value, "symbol"])
     }
   }
   else if (att == "atom->number") {
     att <- "atom"
     convert <- function(value) {
       if (is.numeric(value)) value
-      else chemicalElements[chemicalElements$symbol == value, "number"]
+      ##else chemicalElements[chemicalElements$symbol == value, "number"]
+      else .chemicalElements()[.chemicalElements()$symbol == value, "number"]
     }
   }
 

@@ -1,4 +1,8 @@
 useDynLib(QuACN)
 
+import(RBGL)
+import(graph)
+import(combinat)
+
 exportPattern("^[[:alpha:]]+")
 

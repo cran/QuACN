@@ -5,7 +5,8 @@
 network using the V1 information functional for vertex-labeled graphs.  It is
 based on the same principles as infoTheoreticGCM.}
 \usage{
-infoTheoreticLabeledV1(g, dist=NULL, coeff="lin", custCoeff=NULL, coeffMatrix=NULL, lambda=1000)
+infoTheoreticLabeledV1(g, dist=NULL, coeff="lin",
+custCoeff=NULL, coeffMatrix=NULL, lambda=1000)
 }
 \arguments{
   \item{g}{a graph as a graphNEL object.  Each vertex must have an "atom" data

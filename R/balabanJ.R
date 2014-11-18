@@ -1,6 +1,5 @@
 balabanJ <- function(g, dist=NULL){
   # check if g is a graphNEL object
-  require("graph")
   if(class(g)[1]!="graphNEL"){
     stop("'g' must be a 'graphNEL' object")
   }

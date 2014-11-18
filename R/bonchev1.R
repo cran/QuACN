@@ -1,5 +1,4 @@
 bonchev1 <- function(g,dist=NULL){
-  require("graph")
   if(class(g)[1]!="graphNEL"){
     stop("'g' must be a 'graphNEL' object")
   }

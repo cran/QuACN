@@ -2,9 +2,7 @@
 ##keep.weights: a flag to indicate whether weights should be considered when performing the conversion (DEFAULT= FALSE)
 ##currently ignored, added for later development
 distanceMatrix <- function(g, keep.weights=FALSE) {
-  require("graph")
-  require("RBGL")
-  #print("Distance...")
+   #print("Distance...")
   # check if g is a graphNEL object
   if(class(g)[1]!="graphNEL"){
     stop("'g' has to be a 'graphNEL' object")
